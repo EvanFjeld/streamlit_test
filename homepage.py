@@ -64,9 +64,9 @@ def pag_names_functions(file):
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     df['AnalysisType'] = "single_location_analysis"
-
-    options = {key: [filename, analysis_type] for key, (filename, analysis_type) in zip(df['Location'], zip(df['filename'], df['AnalysisType']))}
+    
     options['-'] = ["intro", ""]
+    options = {key: [filename, analysis_type] for key, (filename, analysis_type) in zip(df['Location'], zip(df['filename'], df['AnalysisType']))}
     
     return options
 
