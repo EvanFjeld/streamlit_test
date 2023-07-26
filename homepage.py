@@ -1,5 +1,6 @@
 #pip install git+https://github.com/streamlit/files-connection
 #from st_files_connection import FilesConnection
+import streamlit as st
 
 def intro():
     import streamlit as st
