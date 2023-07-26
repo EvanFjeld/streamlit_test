@@ -50,7 +50,7 @@ def plotting_demo(file):
 page_names_to_funcs = {
     "—": intro,
     "Location 1": location_1,
-    "Location 1": location_2
+    "Location 2": location_2
 }
 
 st.sidebar.button("About")
