@@ -65,7 +65,7 @@ def pag_names_functions(file):
 
     df['AnalysisType'] = "single_location_analysis"
     
-    return df.set_index('Location').to_dict(orient='index')
+    return {key: [filename, analysis_type] for key, (filename, analysis_type) in zip(df['Location'], zip(df['filename'], df['AnalysisType']))}
 
 
 page_names_to_funcs = pag_names_functions("Locations")
