@@ -56,19 +56,19 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
-def pag_names_functions(file):
-    import pandas as pd
+# def pag_names_functions(file):
+#     import pandas as pd
     
-    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/" + file + ".csv"
-    df = pd.read_csv(AWS_BUCKET_URL + file_name)
+#     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+#     file_name = "/streamlit_data/" + file + ".csv"
+#     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
-    df['AnalysisType'] = "single_location_analysis"
+#     df['AnalysisType'] = "single_location_analysis"
     
-    options['-'] = ["intro", ""]
-    options = {key: [filename, analysis_type] for key, (filename, analysis_type) in zip(df['Location'], zip(df['filename'], df['AnalysisType']))}
+#     options['-'] = ["intro", ""]
+#     options = {key: [filename, analysis_type] for key, (filename, analysis_type) in zip(df['Location'], zip(df['filename'], df['AnalysisType']))}
     
-    return options
+#     return options
 
 
 #page_names_to_funcs = pag_names_functions("Locations")
