@@ -78,4 +78,4 @@ page_names_to_funcs = pag_names_functions("Locations")
 
 st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name[0]](page_names_to_funcs[demo_name[1]])
+page_names_to_funcs[demo_name[1]](page_names_to_funcs[demo_name[2]])
