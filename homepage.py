@@ -75,10 +75,10 @@ def convert_df(df):
 
 page_names_to_funcs = {
     "—": intro,
-    "Location 1": [single_location_analysis, "test"],
-    "Location 2": [single_location_analysis, "location2"]
+    "Location 1": lambda: single_location_analysis("test"),
+    "Location 2": lambda: single_location_analysis("location2")
 }
 
 st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name[1]](page_names_to_funcs[demo_name[2]])
+page_names_to_funcs[selected_page]()
