@@ -68,7 +68,7 @@ def convert_df(df):
 #page_names_to_funcs = pag_names_functions("Locations")
 
 page_names_to_funcs = {
-    "—": [intro,""],
+    "—": [intro, "", 0],
     "Location 1": [single_location_analysis, "test", 1],
     "Location 2": [single_location_analysis, "location2", 2],
 }
