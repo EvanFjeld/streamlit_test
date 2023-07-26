@@ -19,7 +19,7 @@ def intro():
 def from_data_aws(filename):
     #filename = 'Logging_Scars_Dataset_clean.csv'
     
-    bucket_name = 's3://carbon-forecaster-capstone-s3/
+    bucket_name = 's3://carbon-forecaster-capstone-s3/'
     
     aws_access_key = 'AKIASLT4VRPWPOTVUOXV'
     aws_secret_key = 'your_aws_secret_key'
