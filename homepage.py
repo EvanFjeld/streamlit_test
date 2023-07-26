@@ -4,7 +4,7 @@ def intro():
     import streamlit as st
 
     st.write("# Boreal Forest Carbon Forecaster")
-    st.sidebar.success("Select Location.")
+    st.sidebar.success("Select Location above.")
 
     st.markdown(
         """
