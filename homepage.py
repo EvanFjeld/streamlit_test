@@ -13,13 +13,10 @@ def intro():
     """
     )
 
-# def get_aws_data(file_name):
-#     s3_bucket = "s3://carbon-forecaster-capstone-s3/streamlit_data/"
-#     conn = st.experimental_connection("s3", type=FilesConnection)
-#     df = conn.read_csv(f"s3://{s3_bucket}/{file_key}")
-#     st.dataframe(df)
+def location_1():
+    plotting_demo("test.csv")
 
-def plotting_demo(file):
+def plotting_demo():
     import streamlit as st
     import time
     import numpy as np
@@ -49,7 +46,7 @@ def plotting_demo(file):
 
 page_names_to_funcs = {
     "—": intro,
-    "Location 1": plotting_demo("test.csv"),
+    "Location 1": location_1,
 }
 
 st.sidebar.button("About")
