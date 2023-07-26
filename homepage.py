@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+from st_files_connection import FilesConnection
 
 def intro():
     import streamlit as st
@@ -10,6 +12,12 @@ def intro():
         Welcome to the Boreal Forest Carbon Calculator
     """
     )
+
+def get_aws_data(file_name):
+    s3_bucket = "s3://carbon-forecaster-capstone-s3/streamlit_data/"
+    conn = st.experimental_connection("s3", type=FilesConnection)
+    df = conn.read_csv(f"s3://{s3_bucket}/{file_key}")
+    st.dataframe(df)
 
 def mapping_demo():
     import streamlit as st
