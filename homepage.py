@@ -57,7 +57,7 @@ def pag_names_functions(file):
     file_name = "/streamlit_data/" + file + ".csv"
     saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
-    saved_options['AnalysisType'] = "single_location_analysis"
+    saved_options['AnalysisType'] = single_location_analysis
     saved_options= saved_options.set_index('Location')
     
     options = {"-": ["", "intro"]}
