@@ -57,6 +57,8 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 def pag_names_functions(file):
+    import pandas as pd
+    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
