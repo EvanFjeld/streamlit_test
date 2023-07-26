@@ -16,7 +16,7 @@ def intro():
 def location_1():
     plotting_demo("test.csv")
 
-def plotting_demo():
+def plotting_demo(file):
     import streamlit as st
     import time
     import numpy as np
