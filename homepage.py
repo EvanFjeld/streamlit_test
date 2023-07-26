@@ -63,9 +63,7 @@ def pag_names_functions(file):
 
     df['AnalysisType'] = "single_location_analysis"
 
-    df.set_index('Name', inplace=True)
-
-    return df.to_dict(orient='index')
+    return df.set_index('Location').to_dict(orient='index')
 
 
 page_names_to_funcs = pag_names_functions("Locations")
