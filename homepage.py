@@ -64,8 +64,10 @@ def pag_names_functions(file):
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     df['AnalysisType'] = "single_location_analysis"
-
-    return df.set_index('Location').to_dict(orient='index')
+    
+    dict = df.set_index('Location').to_dict(orient='index')
+    print(dict)
+    return dict
 
 
 page_names_to_funcs = pag_names_functions("Locations")
