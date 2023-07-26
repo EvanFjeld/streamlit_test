@@ -162,9 +162,7 @@ def data_frame_demo():
     st.markdown(f"# {list(page_names_to_funcs.keys())[3]}")
     st.write(
         """
-        This demo shows how to use `st.write` to visualize Pandas DataFrames.
-
-(Data courtesy of the [UN Data Explorer](http://data.un.org/Explorer.aspx).)
+        Example pulling data from s3
 """
     )
 
@@ -178,10 +176,10 @@ def data_frame_demo():
     try:
         df = get_UN_data()
         countries = st.multiselect(
-            "Choose location", list(df.index), ["LoggingScar"]
+            "Choose location", list(df.Location), ["LoggingScar"]
         )
         if not countries:
-            st.error("Please select at least one country.")
+            st.error("Please select at least one location.")
         else:
             data = df.loc[LoggingScar]
             st.write("### Gpp", data.sort_index())
