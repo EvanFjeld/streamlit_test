@@ -1,3 +1,6 @@
+pip install streamlit
+pip install git+https://github.com/streamlit/files-connection
+
 import streamlit as st
 import pandas as pd
 from st_files_connection import FilesConnection
