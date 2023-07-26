@@ -71,15 +71,14 @@ def pag_names_functions(file):
     return options
 
 
-page_names_to_funcs = pag_names_functions("Locations")
+#page_names_to_funcs = pag_names_functions("Locations")
 
-# page_names_to_funcs = {
-#     "—": intro,
-#     "Location 1": single_location_analysis, "test",
-#     "Location 2": single_location_analysis, "location2",
-# }
+page_names_to_funcs = {
+    "—": intro,
+    "Location 1": single_location_analysis, "test",
+    "Location 2": single_location_analysis, "location2",
+}
 
 st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
-st.markdown(str(demo_name))
 page_names_to_funcs[demo_name[1]](page_names_to_funcs[demo_name[0]])
