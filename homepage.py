@@ -171,12 +171,12 @@ def data_frame_demo():
         #AWS_BUCKET_URL = "http://streamlit-demo-data.s3-us-west-2.amazonaws.com"
         AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
         df = pd.read_csv(AWS_BUCKET_URL + "/streamlit_data/test.csv")
-        return df.set_index("Region")
+        return df.set_index("Location")
 
     try:
         df = get_UN_data()
         countries = st.multiselect(
-            "Choose location", list(df.Location), ["LoggingScar"]
+            "Choose location", list(df.index), ["LoggingScar"]
         )
         if not countries:
             st.error("Please select at least one location.")
