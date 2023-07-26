@@ -19,7 +19,7 @@ def intro():
 #     df = conn.read_csv(f"s3://{s3_bucket}/{file_key}")
 #     st.dataframe(df)
 
-def plotting_demo():
+def plotting_demo(file):
     import streamlit as st
     import time
     import numpy as np
@@ -33,7 +33,8 @@ def plotting_demo():
     )
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    df = pd.read_csv(AWS_BUCKET_URL + "/streamlit_data/test.csv")
+    file_name = "/streamlit_data/" + file + ".csv"
+    df = pd.read_csv(AWS_BUCKET_URL + file_name)
     
     progress_bar = st.sidebar.progress(0)
     status_text = st.sidebar.empty()
@@ -48,7 +49,7 @@ def plotting_demo():
 
 page_names_to_funcs = {
     "—": intro,
-    "Location 1": plotting_demo,
+    "Location 1": plotting_demo("test.csv"),
 }
 
 st.sidebar.button("About")
