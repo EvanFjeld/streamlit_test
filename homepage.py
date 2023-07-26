@@ -14,7 +14,7 @@ def intro():
     )
 
 def location_1():
-    plotting_demo("test.csv")
+    plotting_demo("test")
 
 def plotting_demo(file):
     import streamlit as st
