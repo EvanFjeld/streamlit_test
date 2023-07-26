@@ -13,13 +13,13 @@ def intro(file, num):
     """
     )
 
-def single_location_analysis(file, num):
+def single_location_analysis(file, location):
     import streamlit as st
     import time
     import numpy as np
     import pandas as pd
 
-    st.markdown(f'# {list(page_names_to_funcs.keys())[num]}')
+    st.markdown(f'# {location_name}')
     st.write(
         """
         Gpp over time
@@ -68,11 +68,11 @@ def convert_df(df):
 #page_names_to_funcs = pag_names_functions("Locations")
 
 page_names_to_funcs = {
-    "—": [intro, "", 0],
-    "Location 1": [single_location_analysis, "test", 1],
-    "Location 2": [single_location_analysis, "location2", 2],
+    "—": [intro, ""],
+    "Location 1": [single_location_analysis, "test"],
+    "Location 2": [single_location_analysis, "location2"],
 }
 
 st.sidebar.button("About")
-demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name][0](page_names_to_funcs[demo_name][1], page_names_to_funcs[demo_name][2])
+location_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
+page_names_to_funcs[location_name][0](page_names_to_funcs[location_name][1], location_name)
