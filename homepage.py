@@ -8,6 +8,7 @@ def intro():
 
     st.write("# Boreal Forest Carbon Forecaster")
     st.sidebar.success("Select Location above.")
+    st.sidebar.button("About")
 
     st.markdown(
         """
