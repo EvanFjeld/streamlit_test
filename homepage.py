@@ -41,10 +41,20 @@ def plotting_demo(file, num):
     last_rows = df.Gpp
     chart = st.line_chart(last_rows)
 
-    # Streamlit widgets automatically run the script from top to bottom. Since
-    # this button is not connected to any other logic, it just causes a plain
-    # rerun.
-    st.button("Re-run")
+    csv = convert_df(df)
+
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='gpp_data.csv',
+        mime='text/csv',
+    )
+
+
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
 
 
 page_names_to_funcs = {
