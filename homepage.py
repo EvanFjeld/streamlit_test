@@ -1,38 +1,16 @@
 import streamlit as st
-import pandas as pd
-#import boto3
-#from botocore.exceptions import NoCredentialsError
 
 def intro():
     import streamlit as st
 
-    st.write("# Boreal Forest Carbon Forecaster")
-    st.sidebar.success("Select Location above.")
-    
+    st.write("# Boreal Forest Carbon Caolculator")
+    st.sidebar.success("Select a location.")
 
     st.markdown(
         """
-        Welcome! something else that makes sense. 
+        Welcome to the Boreal Forest Carbon Calculator
     """
     )
-
-def from_data_aws(filename):
-    #filename = 'Logging_Scars_Dataset_clean.csv'
-    
-    bucket_name = 's3://carbon-forecaster-capstone-s3/'
-    
-    aws_access_key = 'AKIASLT4VRPWPOTVUOXV'
-    aws_secret_key = 'your_aws_secret_key'
-
-    s3 = boto3.client('s3', aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key)
-
-    try:
-        obj = s3.get_object(Bucket=bucket_name, Key=filename)
-        return pd.read_json(obj['Body'])
-    except NoCredentialsError:
-        st.error("AWS credentials are not provided. Please provide valid AWS credentials to access the S3 bucket.")
-    except Exception as e:
-        st.error(f"An error occurred while fetching the data from S3: {e}")
 
 def mapping_demo():
     import streamlit as st
@@ -231,18 +209,5 @@ page_names_to_funcs = {
     "DataFrame Demo": data_frame_demo
 }
 
-# Get the selected page from the button click
-selected_demo = st.sidebar.button("Introduction", key="intro")
-selected_demo |= st.sidebar.button("Plotting Demo", key="plot")
-selected_demo |= st.sidebar.button("Mapping Demo", key="map")
-selected_demo |= st.sidebar.button("DataFrame Demo", key="df")
-selected_demo |= st.sidebar.button("About", key="about")
-
-st.sidebar.button("About")
-
-# Call the corresponding function based on the selected page
-if selected_demo:
-    for demo_name, demo_func in page_names_to_funcs.items():
-        if st.sidebar.button(demo_name, key=demo_name):
-            demo_func()
-
+demo_name = st.sidebar.selectbox("Choose a demo", page_names_to_funcs.keys())
+page_names_to_funcs[demo_name]()
