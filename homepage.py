@@ -14,18 +14,18 @@ def intro():
     )
 
 def location_1():
-    plotting_demo("test")
+    plotting_demo("test", 1)
 
 def location_2():
-    plotting_demo("location2")
+    plotting_demo("location2", 2)
 
-def plotting_demo(file):
+def plotting_demo(file, num):
     import streamlit as st
     import time
     import numpy as np
     import pandas as pd
 
-    st.markdown(f'# {list(page_names_to_funcs.keys())[1]}')
+    st.markdown(f'# {list(page_names_to_funcs.keys())[num]}')
     st.write(
         """
         Gpp over time
