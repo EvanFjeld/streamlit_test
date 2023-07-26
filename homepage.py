@@ -13,11 +13,11 @@ def intro():
     """
     )
 
-def location_1():
-    plotting_demo("test", 1)
+# def location_1():
+#     plotting_demo("test", 1)
 
-def location_2():
-    plotting_demo("location2", 2)
+# def location_2():
+#     plotting_demo("location2", 2)
 
 def plotting_demo(file, num):
     import streamlit as st
@@ -59,10 +59,10 @@ def convert_df(df):
 
 page_names_to_funcs = {
     "—": intro,
-    "Location 1": location_1,
-    "Location 2": location_2
+    "Location 1": plotting_demo, "test",
+    "Location 2": plotting_demo, "location2",
 }
 
 st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name]()
+page_names_to_funcs[demo_name[0]](page_names_to_funcs[demo_name[1]])
