@@ -65,9 +65,7 @@ def pag_names_functions(file):
 
     df['AnalysisType'] = "single_location_analysis"
     
-    dict = df.set_index('Location').to_dict(orient='index')
-    print(dict)
-    return dict
+    return df.set_index('Location').to_dict(orient='index')
 
 
 page_names_to_funcs = pag_names_functions("Locations")
@@ -80,4 +78,5 @@ page_names_to_funcs = pag_names_functions("Locations")
 
 st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
+st.markdown(str(demo_name)
 page_names_to_funcs[demo_name[1]](page_names_to_funcs[demo_name[0]])
