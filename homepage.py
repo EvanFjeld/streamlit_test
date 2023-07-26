@@ -1,5 +1,5 @@
-pip install streamlit
-pip install git+https://github.com/streamlit/files-connection
+!pip install streamlit
+!pip install git+https://github.com/streamlit/files-connection
 
 import streamlit as st
 import pandas as pd
