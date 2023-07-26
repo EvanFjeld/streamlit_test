@@ -137,16 +137,6 @@ def plotting_demo():
     last_rows = df.Gpp
     chart = st.line_chart(last_rows)
 
-    for i in range(1, 101):
-        new_rows = last_rows[-1, :]
-        status_text.text("%i%% Complete" % i)
-        chart.add_rows(new_rows)
-        progress_bar.progress(i)
-        last_rows = new_rows
-        time.sleep(0.05)
-
-    progress_bar.empty()
-
     # Streamlit widgets automatically run the script from top to bottom. Since
     # this button is not connected to any other logic, it just causes a plain
     # rerun.
