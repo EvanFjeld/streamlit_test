@@ -50,29 +50,29 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
-# def pag_names_functions(file):
-#     import pandas as pd
+def pag_names_functions(file):
+    import pandas as pd
     
-#     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-#     file_name = "/streamlit_data/" + file + ".csv"
-#     df = pd.read_csv(AWS_BUCKET_URL + file_name)
+    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    file_name = "/streamlit_data/" + file + ".csv"
+    saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
-#     df['AnalysisType'] = "single_location_analysis"
+    saved_options['AnalysisType'] = "single_location_analysis"
     
-#     options['-'] = ["intro", ""]
-#     options = {key: [filename, analysis_type] for key, (filename, analysis_type) in zip(df['Location'], zip(df['filename'], df['AnalysisType']))}
+    options = {"-": ["intro",""]}
+    options = {**options, **saved_options}
     
-#     return options
+    return options
 
 
-#page_names_to_funcs = pag_names_functions("Locations")
+page_names_to_funcs = pag_names_functions("Locations")
 
-page_names_to_funcs = {
-    "—": [intro, ""],
-    "Location 1": [single_location_analysis, "test"],
-    "Location 2": [single_location_analysis, "location2"],
-}
+# page_names_to_funcs = {
+#     "—": [intro, ""],
+#     "Location 1": [single_location_analysis, "test"],
+#     "Location 2": [single_location_analysis, "location2"],
+# }
 
 st.sidebar.button("About")
 location_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
-page_names_to_funcs[location_name][0](page_names_to_funcs[location_name][1], location_name)
+page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
