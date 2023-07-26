@@ -75,8 +75,8 @@ def convert_df(df):
 
 page_names_to_funcs = {
     "—": intro,
-    "Location 1": single_location_analysis, "test",
-    "Location 2": single_location_analysis, "location2",
+    "Location 1": [single_location_analysis, "test"],
+    "Location 2": [single_location_analysis, "location2"]
 }
 
 st.sidebar.button("About")
