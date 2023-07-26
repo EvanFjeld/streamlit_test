@@ -181,7 +181,6 @@ def data_frame_demo():
         if not countries:
             st.error("Please select at least one location.")
         else:
-            data = df.loc[Location]
             st.write("### Gpp", data.sort_index())
 
             data = data.T.reset_index()
