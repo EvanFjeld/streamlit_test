@@ -2,7 +2,7 @@
 #from st_files_connection import FilesConnection
 import streamlit as st
 
-def intro():
+def intro(file, num):
     import streamlit as st
 
     st.write("# Boreal Forest Carbon Caolculator")
