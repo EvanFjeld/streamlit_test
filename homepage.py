@@ -4,7 +4,6 @@ def intro():
     import streamlit as st
 
     st.write("# Boreal Forest Carbon Caolculator")
-    st.sidebar.success("Select a location.")
 
     st.markdown(
         """
@@ -210,5 +209,5 @@ page_names_to_funcs = {
 }
 
 st.sidebar.button("About")
-demo_name = st.sidebar.selectbox("Choose a demo", page_names_to_funcs.keys())
+demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
 page_names_to_funcs[demo_name]()
