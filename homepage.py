@@ -120,6 +120,7 @@ def plotting_demo():
     import streamlit as st
     import time
     import numpy as np
+    import pandas as pd
 
     st.markdown(f'# {list(page_names_to_funcs.keys())[1]}')
     st.write(
