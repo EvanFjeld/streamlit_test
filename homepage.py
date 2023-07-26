@@ -184,7 +184,7 @@ def data_frame_demo():
 
             data = data.T.reset_index()
             data = pd.melt(data, id_vars=["index"]).rename(
-                columns={"index": "date", "Gpp": "Gpp"}
+                columns={"index": "Date", "Gpp": "Gpp"}
             )
             chart = (
                 alt.Chart(data)
