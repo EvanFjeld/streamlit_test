@@ -177,7 +177,7 @@ def data_frame_demo():
         location = st.multiselect(
             "Choose location", list(df.index), ["LoggingScar"]
         )
-        if not countries:
+        if not location:
             st.error("Please select at least one location.")
         else:
             data = df.loc[location]
