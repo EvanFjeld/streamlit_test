@@ -58,9 +58,13 @@ def pag_names_functions(file):
     saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     saved_options['AnalysisType'] = "single_location_analysis"
+    saved_options= saved_options.set_index('Location')
     
-    options = {"-": ["intro",""]}
-    options = {**options, **saved_options}
+    options = {"-": ["", "intro"]}
+    
+    for index, row in saved_options.iterrows():
+        row_as_list = row.tolist()
+        options[index] =  row_as_list
     
     return options
 
