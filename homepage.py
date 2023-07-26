@@ -209,5 +209,6 @@ page_names_to_funcs = {
     "DataFrame Demo": data_frame_demo
 }
 
+st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a demo", page_names_to_funcs.keys())
 page_names_to_funcs[demo_name]()
