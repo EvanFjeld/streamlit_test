@@ -19,7 +19,7 @@ def intro():
 # def location_2():
 #     plotting_demo("location2", 2)
 
-def plotting_demo(file, num):
+def single_location_analysis(file, num):
     import streamlit as st
     import time
     import numpy as np
@@ -56,12 +56,25 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
+def pag_names_functions(file):
+    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    file_name = "/streamlit_data/" + file + ".csv"
+    df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
-page_names_to_funcs = {
-    "—": intro,
-    "Location 1": plotting_demo, "test",
-    "Location 2": plotting_demo, "location2",
-}
+    df['AnalysisType'] = "single_location_analysis"
+
+    df.set_index('Name', inplace=True)
+
+    return df.to_dict(orient='index')
+
+
+page_names_to_funcs = pag_names_functions("Locations")
+
+# page_names_to_funcs = {
+#     "—": intro,
+#     "Location 1": single_location_analysis, "test",
+#     "Location 2": single_location_analysis, "location2",
+# }
 
 st.sidebar.button("About")
 demo_name = st.sidebar.selectbox("Choose a location", page_names_to_funcs.keys())
