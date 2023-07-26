@@ -1,5 +1,3 @@
-import streamlit as st
-import pandas as pd
 #pip install git+https://github.com/streamlit/files-connection
 #from st_files_connection import FilesConnection
 
@@ -175,12 +173,13 @@ def data_frame_demo():
 
     try:
         df = get_UN_data()
-        countries = st.multiselect(
+        location = st.multiselect(
             "Choose location", list(df.index), ["LoggingScar"]
         )
         if not countries:
             st.error("Please select at least one location.")
         else:
+            data = df.loc[location]
             st.write("### Gpp", data.sort_index())
 
             data = data.T.reset_index()
