@@ -209,5 +209,15 @@ page_names_to_funcs = {
     "DataFrame Demo": data_frame_demo
 }
 
-demo_name = st.sidebar.selectbox("Choose a demo", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name]()
+# Get the selected page from the button click
+selected_demo = st.sidebar.button("Introduction", key="intro")
+selected_demo |= st.sidebar.button("Plotting Demo", key="plot")
+selected_demo |= st.sidebar.button("Mapping Demo", key="map")
+selected_demo |= st.sidebar.button("DataFrame Demo", key="df")
+selected_demo |= st.sidebar.button("About", key="about")
+
+# Call the corresponding function based on the selected page
+if selected_demo:
+    for demo_name, demo_func in page_names_to_funcs.items():
+        if st.sidebar.button(demo_name, key=demo_name):
+            demo_func()
