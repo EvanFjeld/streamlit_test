@@ -124,15 +124,16 @@ def plotting_demo():
     st.markdown(f'# {list(page_names_to_funcs.keys())[1]}')
     st.write(
         """
-        This demo illustrates a combination of plotting and animation with
-Streamlit. We're generating a bunch of random numbers in a loop for around
-5 seconds. Enjoy!
+        Gpp over time
 """
     )
 
+    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    df = pd.read_csv(AWS_BUCKET_URL + "/streamlit_data/test.csv")
+    
     progress_bar = st.sidebar.progress(0)
     status_text = st.sidebar.empty()
-    last_rows = np.random.randn(1, 1)
+    last_rows = df.Gpp
     chart = st.line_chart(last_rows)
 
     for i in range(1, 101):
