@@ -30,10 +30,15 @@ def single_location_analysis(file, location):
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
     
+    # Create the Streamlit app
+    st.title("Gpp Data Visualization")
+    
+    # Progress bar and status text in the sidebar
     progress_bar = st.sidebar.progress(0)
     status_text = st.sidebar.empty()
-    last_rows = df.Gpp
-    chart = st.line_chart(last_rows)
+    
+    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
+    chart = st.line_chart(data=df, x='date', y='Gpp')
 
     csv = convert_df(df)
 
