@@ -38,7 +38,7 @@ def single_location_analysis(file, location):
     import numpy as np
     import pandas as pd
 
-    st.markdown(f'# {location_name}')
+    st.markdown(f'# {location}')
     st.write(
         """
         Gpp over time
