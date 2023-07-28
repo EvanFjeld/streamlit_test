@@ -18,7 +18,7 @@ def single_location_page():
     page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 
 def about_page():
-        st.markdown('# About the Carbon Forecaster')
+    st.markdown('# About the Carbon Forecaster')
     st.write(
         """
         This is the final project for a masters in data science program at UC Berkeley.
