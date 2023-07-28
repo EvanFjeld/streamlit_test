@@ -1,6 +1,9 @@
 #pip install git+https://github.com/streamlit/files-connection
 #from st_files_connection import FilesConnection
 import streamlit as st
+import time
+import numpy as np
+import pandas as pd
 
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
@@ -32,10 +35,6 @@ def about_page():
     )
 
 def single_location_analysis(file, location):
-    import time
-    import numpy as np
-    import pandas as pd
-
     st.markdown(f'# {location}')
     st.write(
         """
