@@ -116,8 +116,8 @@ single_location_to_funcs = single_location_functions("Locations")
 
 # Check if the app is just starting (no state exists)
 if "initialized" not in st.session_state:
-    intro()  # Display the homepage by default
     st.session_state["initialized"] = True  # Set the flag to True after displaying the intro
+    intro()  # Display the homepage by default
 
 st.sidebar.button("Homepage", on_click=intro)
 st.sidebar.button("Single Location", on_click=single_location_page)
