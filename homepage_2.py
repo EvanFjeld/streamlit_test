@@ -15,6 +15,7 @@ def intro(file, num):
 
 def single_location_page():
     location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
+    page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 
 def single_location_analysis(file, location):
     import streamlit as st
@@ -87,5 +88,5 @@ page_names_to_funcs = pag_names_functions("Locations")
 st.sidebar.button("Single Location", single_location_page())
 st.sidebar.button("Location Comparison")
 st.sidebar.button("About")
-location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
+# location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
 page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
