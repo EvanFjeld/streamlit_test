@@ -2,6 +2,16 @@
 #from st_files_connection import FilesConnection
 import streamlit as st
 
+# Define the pages dictionary
+pages = {
+    "Homepage": intro,
+    "Single Location": single_location_page,
+    "Location Comparison": location_comparison_page,
+    "About": about_page
+}
+
+single_location_to_funcs = single_location_functions("Locations")
+
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
 
@@ -14,7 +24,7 @@ def intro():
 def single_location_page():
     page_names_to_funcs = pag_names_functions("Locations")
     location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
-    page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+    single_location_to_funcs[location_name][1](single_location_to_funcs[location_name][0], location_name)
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
@@ -73,7 +83,7 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
-def pag_names_functions(file):
+def single_location_functions(file):
     import pandas as pd
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
@@ -103,5 +113,3 @@ st.sidebar.button("Homepage", on_click=intro)
 st.sidebar.button("Single Location", on_click=single_location_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
 st.sidebar.button("About", on_click=about_page)
-# location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
-# page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
