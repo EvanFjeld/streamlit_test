@@ -16,10 +16,10 @@ def intro():
 
 def single_location_page():
     location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
-    
+
     if "selected_location" not in st.session_state:
         st.session_state.selected_location = None
-    
+
     if st.session_state.selected_location != location_name:
         # Clear the previous selection and re-initialize the graph
         st.session_state.selected_location = location_name
@@ -27,12 +27,11 @@ def single_location_page():
 
     # Check if the graph needs to be initialized
     if not st.session_state.get("graph_initialized", False):
-        # Display the "Select a location from the dropdown" message if graph not initialized
         single_location_landing_page(single_location_to_funcs[location_name][0], location_name)
-        st.session_state.graph_initialized = True
     else:
         # If graph is already initialized, display the existing graph
         single_location_analysis(single_location_to_funcs[location_name][0], location_name)
+
 
 
 def location_comparison_page():
@@ -51,8 +50,11 @@ def about_page():
     """
     )
 
-def single_location_landing_page(x, y):
-    st.markdown('# Select a location from the dropdown.')
+def single_location_landing_page(file, location):
+    st.markdown(f"# {location}")
+    st.write("Gpp over time")
+    st.write("Select a location from the dropdown.")
+
 
 def single_location_analysis(file, location):
     st.markdown(f'# {location}')
