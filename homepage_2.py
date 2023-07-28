@@ -83,7 +83,7 @@ def pag_names_functions(file):
     saved_options['AnalysisType'] = single_location_analysis
     saved_options= saved_options.set_index('Location')
     
-    options = {"-": ["", intro]}
+    options = {}
     
     for index, row in saved_options.iterrows():
         row_as_list = row.tolist()
