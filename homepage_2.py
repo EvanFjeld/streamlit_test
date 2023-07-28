@@ -33,7 +33,6 @@ def about_page():
     )
 
 def single_location_analysis(file, location):
-    import streamlit as st
     import time
     import numpy as np
     import pandas as pd
@@ -69,7 +68,7 @@ def single_location_analysis(file, location):
     )
 
 
-@st.cache
+@st.cache_data
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
