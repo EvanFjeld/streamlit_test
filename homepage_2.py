@@ -81,7 +81,7 @@ def single_location_functions(file):
     saved_options['AnalysisType'] = single_location_analysis
     saved_options= saved_options.set_index('Location')
     
-    options = {}
+    options = {"-"}
     
     for index, row in saved_options.iterrows():
         row_as_list = row.tolist()
@@ -104,4 +104,3 @@ st.sidebar.button("Single Location", on_click=single_location_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
 st.sidebar.button("About", on_click=about_page)
 
-intro()
