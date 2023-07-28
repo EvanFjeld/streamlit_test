@@ -113,7 +113,7 @@ def convert_df(df):
 
 def get_lat_long_options():
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/location_files/" + Lat_Long_Locations + ".csv"
+    file_name = "/streamlit_data/location_files/Lat_Long_Locations.csv"
     return pd.read_csv(AWS_BUCKET_URL + file_name)
     
 
