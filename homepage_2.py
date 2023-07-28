@@ -27,10 +27,14 @@ def single_location_page():
 
     # Check if the graph needs to be initialized
     if not st.session_state.get("graph_initialized", False):
-        single_location_landing_page(single_location_to_funcs[location_name][0], location_name)
+        # Initialize an empty placeholder for the graph
+        graph_placeholder = st.empty()
+        single_location_analysis(graph_placeholder, single_location_to_funcs[location_name][0], location_name)
+        st.session_state.graph_initialized = True
     else:
         # If graph is already initialized, display the existing graph
-        single_location_analysis(single_location_to_funcs[location_name][0], location_name)
+        single_location_analysis(None, single_location_to_funcs[location_name][0], location_name)
+
 
 
 
@@ -56,14 +60,12 @@ def single_location_landing_page(file, location):
     st.write("Select a location from the dropdown.")
 
 
-def single_location_analysis(file, location):
-    st.markdown(f'# {location}')
-    st.write(
-        """
-        Gpp over time
-    """
-    )
-
+def single_location_analysis(placeholder, file, location):
+    if placeholder is not None:
+        # Display the placeholder if it exists
+        placeholder.markdown(f"# {location}")
+        placeholder.write("Gpp over time")
+    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
