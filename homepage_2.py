@@ -12,6 +12,7 @@ def intro():
     )
 
 def single_location_page():
+    page_names_to_funcs = pag_names_functions("Locations")
     location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
     page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 
@@ -90,8 +91,6 @@ def pag_names_functions(file):
         options[index] =  row_as_list
     
     return options
-
-page_names_to_funcs = pag_names_functions("Locations")
 
 # Define the pages dictionary
 pages = {
