@@ -27,8 +27,13 @@ def single_location_page():
 
     # Check if the graph needs to be initialized
     if not st.session_state.get("graph_initialized", False):
-        single_location_analysis(single_location_to_funcs[location_name][0], location_name)
+        # Display the "Select a location from the dropdown" message if graph not initialized
+        single_location_landing_page(single_location_to_funcs[location_name][0], location_name)
         st.session_state.graph_initialized = True
+    else:
+        # If graph is already initialized, display the existing graph
+        single_location_analysis(single_location_to_funcs[location_name][0], location_name)
+
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
