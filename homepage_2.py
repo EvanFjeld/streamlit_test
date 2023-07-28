@@ -101,8 +101,11 @@ page_names_to_funcs = pag_names_functions("Locations")
 #     "Location 2": [single_location_analysis, "location2"],
 # }
 
-st.sidebar.button("Single Location", single_location_page())
-st.sidebar.button("Location Comparison")
-st.sidebar.button("About", about_page())
+st.sidebar.button("Single Location", on_click=single_location_page)
+st.sidebar.button("Location Comparison", on_click=location_comparison_page)
+st.sidebar.button("About", on_click=about_page)
 # location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
 # page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+
+# Start with the intro page
+intro()
