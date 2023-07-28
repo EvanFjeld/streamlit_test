@@ -17,12 +17,20 @@ def single_location_page():
     location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
     page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 
+def location_comparison_page():
+    st.markdown('# This page is meant to compare multiple locations')
+    st.write(
+        """
+        What to know when you compare locations.
+    """
+    )
+
 def about_page():
     st.markdown('# About the Carbon Forecaster')
     st.write(
         """
         This is the final project for a masters in data science program at UC Berkeley.
-"""
+    """
     )
 
 def single_location_analysis(file, location):
@@ -35,7 +43,7 @@ def single_location_analysis(file, location):
     st.write(
         """
         Gpp over time
-"""
+    """
     )
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
