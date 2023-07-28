@@ -34,7 +34,7 @@ def about_page():
     """
     )
 
-def single_location_landing_page():
+def single_location_landing_page(x, y):
     st.markdown('# Select a location from the dropdown.')
 
 def single_location_analysis(file, location):
