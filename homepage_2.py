@@ -2,16 +2,6 @@
 #from st_files_connection import FilesConnection
 import streamlit as st
 
-# Define the pages dictionary
-pages = {
-    "Homepage": intro,
-    "Single Location": single_location_page,
-    "Location Comparison": location_comparison_page,
-    "About": about_page
-}
-
-single_location_to_funcs = single_location_functions("Locations")
-
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
 
@@ -108,6 +98,8 @@ pages = {
     "Location Comparison": location_comparison_page,
     "About": about_page
 }
+
+single_location_to_funcs = single_location_functions("Locations")
 
 st.sidebar.button("Homepage", on_click=intro)
 st.sidebar.button("Single Location", on_click=single_location_page)
