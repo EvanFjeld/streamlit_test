@@ -2,9 +2,7 @@
 #from st_files_connection import FilesConnection
 import streamlit as st
 
-def intro(file, num):
-    import streamlit as st
-
+def intro():
     st.write("# Boreal Forest Carbon Calculator")
 
     st.markdown(
@@ -97,11 +95,13 @@ page_names_to_funcs = pag_names_functions("Locations")
 
 # Define the pages dictionary
 pages = {
+    "Homepage": intro,
     "Single Location": single_location_page,
     "Location Comparison": location_comparison_page,
     "About": about_page
 }
 
+st.sidebar.button("Homepage", on_click=intro)
 st.sidebar.button("Single Location", on_click=single_location_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
 st.sidebar.button("About", on_click=about_page)
