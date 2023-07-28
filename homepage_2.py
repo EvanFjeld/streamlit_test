@@ -84,7 +84,8 @@ def single_location_functions(file):
     saved_options['AnalysisType'] = single_location_analysis
     saved_options= saved_options.set_index('Location')
     
-    options = {{"-": ["", single_location_landing_page]}}
+    # options = {{"-": ["", ""]}}
+    options = {}
     
     for index, row in saved_options.iterrows():
         row_as_list = row.tolist()
