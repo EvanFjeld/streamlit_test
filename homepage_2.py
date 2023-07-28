@@ -92,8 +92,7 @@ def single_location_analysis(placeholder, file, location):
 def single_lat_long():
     df = get_lat_long_options()
     
-    lat_options = df.Lat
-    long_options = df.Long
+    lat_options = df.Lat.unique()
     
     # Create two columns for the layout
     col1, col2 = st.columns(2)
@@ -101,7 +100,9 @@ def single_lat_long():
     # Display the latitude selectbox in the first column
     with col1:
         lat = st.selectbox("Choose a Latitude", lat_options)
-    
+
+    filtered_df = df.loc[df['Lat'] == lat]
+    long_options = filtered_df.Long.unique
     # Display the longitude selectbox in the second column
     with col2:
         long = st.selectbox("Choose a Longitude", long_options)
