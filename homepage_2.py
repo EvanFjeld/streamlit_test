@@ -95,11 +95,12 @@ def pag_names_functions(file):
 
 page_names_to_funcs = pag_names_functions("Locations")
 
-# page_names_to_funcs = {
-#     "—": [intro, ""],
-#     "Location 1": [single_location_analysis, "test"],
-#     "Location 2": [single_location_analysis, "location2"],
-# }
+# Define the pages dictionary
+pages = {
+    "Single Location": single_location_page,
+    "Location Comparison": location_comparison_page,
+    "About": about_page
+}
 
 st.sidebar.button("Single Location", on_click=single_location_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
