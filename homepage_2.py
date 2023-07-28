@@ -102,7 +102,7 @@ def single_lat_long():
         lat = st.selectbox("Choose a Latitude", lat_options)
 
     filtered_df = df.loc[df['Lat'] == lat]
-    long_options = filtered_df.Long.unique
+    long_options = filtered_df.Long.unique()
     # Display the longitude selectbox in the second column
     with col2:
         long = st.selectbox("Choose a Longitude", long_options)
