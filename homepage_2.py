@@ -94,7 +94,7 @@ def single_lat_long():
     long_options = ["50.1", "50.2"]
     
     # Create two columns for the layout
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     
     # Display the latitude selectbox in the first column
     with col1:
