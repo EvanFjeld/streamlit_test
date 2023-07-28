@@ -93,8 +93,16 @@ def single_lat_long():
     lat_options = ["50.1", "50.2"]
     long_options = ["50.1", "50.2"]
     
-    lat = st.selectbox("Choose a Latitude", lat_options)
-    long = st.selectbox("Choose a Latitude", long_options)
+    # Create two columns for the layout
+    col1, col2 = st.beta_columns(2)
+    
+    # Display the latitude selectbox in the first column
+    with col1:
+        lat = st.selectbox("Choose a Latitude", lat_options)
+    
+    # Display the longitude selectbox in the second column
+    with col2:
+        long = st.selectbox("Choose a Longitude", long_options)
 
 @st.cache_data
 def convert_df(df):
