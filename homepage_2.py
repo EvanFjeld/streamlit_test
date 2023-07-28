@@ -89,6 +89,12 @@ def single_location_analysis(placeholder, file, location):
         mime='text/csv',
     )
 
+def single_lat_long():
+    lat_options = ["50.1", "50.2"]
+    long_options = ["50.1", "50.2"]
+    
+    lat = st.selectbox("Choose a Latitude", lat_options)
+    long = st.selectbox("Choose a Latitude", long_options)
 
 @st.cache_data
 def convert_df(df):
@@ -119,6 +125,7 @@ pages = {
     "Homepage": intro,
     "Single Location": single_location_page,
     "Location Comparison": location_comparison_page,
+    "Explore Lat/Long": single_lat_long,
     "About": about_page
 }
 
@@ -132,5 +139,6 @@ if "initialized" not in st.session_state:
 st.sidebar.button("Homepage", on_click=intro)
 st.sidebar.button("Single Location", on_click=single_location_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
+st.sidebar.button("Explore Lat/Long", on_click=single_lat_long)
 st.sidebar.button("About", on_click=about_page)
 
