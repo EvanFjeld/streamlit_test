@@ -26,7 +26,7 @@ def single_location_page():
 
     # Check if the graph needs to be initialized
     if not st.session_state.get("graph_initialized", False):
-        single_location_to_funcs[location_name][1](single_location_to_funcs[location_name][0], location_name)
+        single_location_analysis(single_location_to_funcs[location_name][0], location_name)
         st.session_state.graph_initialized = True
 
 def location_comparison_page():
