@@ -15,10 +15,12 @@ def intro():
     )
 
 def single_location_page():
+    location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
+    
     if "selected_location" not in st.session_state:
         st.session_state.selected_location = None
-
-    location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
+        single_location_analysis(single_location_to_funcs[location_name][0], location_name)
+    
     if st.session_state.selected_location != location_name:
         # Clear the previous selection and re-initialize the graph
         st.session_state.selected_location = location_name
