@@ -90,8 +90,10 @@ def single_location_analysis(placeholder, file, location):
     )
 
 def single_lat_long():
-    lat_options = ["50.1", "50.2"]
-    long_options = ["50.1", "50.2"]
+    df = get_lat_long_options()
+    
+    lat_options = df.Lat
+    long_options = df.Long
     
     # Create two columns for the layout
     col1, col2 = st.columns(2)
@@ -108,6 +110,12 @@ def single_lat_long():
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
+
+def get_lat_long_options():
+    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    file_name = "/streamlit_data/location_files/" + Lat_Long_Locations + ".csv"
+    return pd.read_csv(AWS_BUCKET_URL + file_name)
+    
 
 def single_location_functions(file):
     import pandas as pd
