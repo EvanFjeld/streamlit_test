@@ -12,8 +12,7 @@ def intro():
     )
 
 def single_location_page():
-    page_names_to_funcs = pag_names_functions("Locations")
-    location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
+    location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
     single_location_to_funcs[location_name][1](single_location_to_funcs[location_name][0], location_name)
 
 def location_comparison_page():
