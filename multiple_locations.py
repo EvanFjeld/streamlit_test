@@ -155,6 +155,6 @@ with loc_col2:
   if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
   location_2_name = st.selectbox("Choose the second location", location2_options)
 
-st.write(f'{location_1_name} file {options[location_1_name]}')
+st.write(f'{location_1_name} file {options[location_1_name][0]}')
 
-multiple_location_analysis(options[location_1_name], options[location_2_name], location_1_name, location_2_name)
+multiple_location_analysis(options[location_1_name][0], options[location_2_name][0], location_1_name, location_2_name)
