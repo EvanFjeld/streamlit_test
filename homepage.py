@@ -24,8 +24,7 @@ def single_location_analysis(file, location):
     """
     )
 
-    age = st.slider('How old are you?', 0, 130, 25)
-    st.write("I'm ", age, 'years old')
+
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
@@ -101,6 +100,9 @@ st.markdown(
     Welcome to the Boreal Forest Carbon Calculator. Select a location to view analysis and a forecast of GPP in that area. 
 """
 )
+
+age = st.slider('How old are you?', 0, 130, 25)
+st.write("I'm ", age, 'years old')
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
