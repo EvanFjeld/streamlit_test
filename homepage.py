@@ -41,7 +41,7 @@ def single_location_analysis(file, location):
     
     # Create the sliders
     start_date = st.slider("Start Date", min_date, max_date, min_date)
-    end_date = st.slider("End Date", , min_date, max_date, max_date)
+    end_date = st.slider("End Date", min_date, max_date, max_date)
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
