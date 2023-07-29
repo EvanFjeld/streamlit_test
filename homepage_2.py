@@ -14,7 +14,6 @@ def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
     st.write("What to know when you compare locations.")
 
-
 def single_lat_long():
     st.markdown('# Explore Lat/Long')
     st.write("Exploring Lat/Long.")
