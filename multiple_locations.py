@@ -137,13 +137,16 @@ for index, row in locations_df.iterrows():
     options[index] =  row_as_list
 
 location1_options = options.keys()
+location_1_name = "-"
 location2_options = options.keys()
+location_2_name = "-"
 
 loc_col1, loc_col2 = st.columns(2)
 with loc_col1:
-  location_1_name = st.selectbox("Choose the first location", location1_options)
+    if location_2_name != "-": location1_options = [x for x in location2_options if x != location_2_name]
+    location_1_name = st.selectbox("Choose the first location", location1_options)
 with loc_col2:
-  location2_options = [x for x in location1_options if x != location_1_name]
+  if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
   location_2_name = st.selectbox("Choose the second location", location2_options)
 
 multiple_location_analysis(options[location_1_name], options[location_2_name], location_1_name, location_2_name)
