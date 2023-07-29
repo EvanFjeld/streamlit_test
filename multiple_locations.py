@@ -28,7 +28,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
     st.markdown(f'# {location1} & {location2}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    loc_1_file_name = "/streamlit_data/" + file + ".csv"
+    loc_1_file_name = "/streamlit_data/" + file1 + ".csv"
     loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
     loc_2_file_name = "/streamlit_data/" + file2 + ".csv"
     loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
@@ -84,14 +84,16 @@ def multiple_location_analysis(file1, file2, location1, location2):
     st.title("Gpp Data Visualization")
 
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
+    chart = st.line_chart(data=filtered_df, x='date', y='Gpp_loc1')
+    # Add a second line to the chart with 'Date' as the x-axis and 'Gpp_loc2' as the y-axis
+    chart.line_chart(data=filtered_df, x='date', y='Gpp_loc2')
 
     csv = convert_df(df)
 
     st.download_button(
         label="Download data as CSV",
         data=csv,
-        file_name='gpp_data.csv',
+        file_name='gpp_comparison_data.csv',
         mime='text/csv',
     )
 
