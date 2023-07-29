@@ -136,9 +136,11 @@ for index, row in locations_df.iterrows():
     row_as_list = row.tolist()
     options[index] =  row_as_list
 
+location1_options = options.keys()
+location2_options = options.keys()
+
 loc_col1, loc_col2 = st.columns(2)
 with loc_col1:
-  location1_options = options.keys()
   location_1_name = st.selectbox("Choose the first location", location1_options)
 with loc_col2:
   location2_options = [x for x in location1_options if x != location_1_name]
