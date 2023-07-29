@@ -139,7 +139,7 @@ for index, row in locations_df.iterrows():
 loc_col1, loc_col2 = st.columns(2)
 with loc_col1:
   location1_options = options.keys()
-  location_1_name = st.selectbox("Choose the first location", location_options)
+  location_1_name = st.selectbox("Choose the first location", location1_options)
 with loc_col2:
   location2_options = [x for x in location1_options if x != location_1_name]
   location_2_name = st.selectbox("Choose the second location", Location2_options)
