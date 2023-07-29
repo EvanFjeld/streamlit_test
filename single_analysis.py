@@ -34,19 +34,18 @@ def main():
     location_files = single_location_files()
     st.write(location_files)
     
-    selected_location = st.selectbox('Select Location', location_files.Location)
+    # selected_location = st.selectbox('Select Location', location_files.Location)
   
-    # Filter the DataFrame based on the location
-    filtered_df = df.loc[df['Location'] == selected_location]
+    # # Filter the DataFrame based on the location
+    # filtered_df = df.loc[df['Location'] == selected_location]
     
-    # Get the filename for the specific location
-    filename_for_location = filtered_df['filename'].values[0]
+    # # Get the filename for the specific location
+    # filename_for_location = filtered_df['filename'].values[0]
 
-    # Read data from AWS S3 based on the selected file
-    try:
-        df = read_data_from_aws(filename_for_location)
-    except Exception as e:
-        st.error(f"Error reading the file from AWS: {e}")
-        return
+    # # Read data from AWS S3 based on the selected file
+    # try:
+    #     df = read_data_from_aws(filename_for_location)
+    # except Exception as e:
+    #     st.error(f"Error reading the file from AWS: {e}")
 
 main()
