@@ -32,6 +32,8 @@ def single_location_analysis(file, location):
 
     # Convert the 'date' column to datetime type
     df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
+
+    st.write("Min Date is " , df.date.min())
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
