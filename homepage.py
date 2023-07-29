@@ -82,6 +82,6 @@ page_names_to_funcs = pag_names_functions("Locations")
 #     "Location 2": [single_location_analysis, "location2"],
 # }
 
-st.sidebar.button("About")
+#st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
 page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
