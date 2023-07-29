@@ -21,7 +21,10 @@ def none_selected(file, num):
         
 
 def multiple_location_analysis(file1, file2, location1, location2):
-    st.markdown(f'# {location_name}')
+    if location1 == "-" or location2 = "-":
+        st.markdown(f'# Select a Location')
+    
+    st.markdown(f'# {location1} & {location2}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     loc_1_file_name = "/streamlit_data/" + file + ".csv"
