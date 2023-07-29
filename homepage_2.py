@@ -104,9 +104,10 @@ def single_location_functions(file):
 
     options = {}
     for index, row in saved_options.iterrows():
-        options[index] = (row['file'], row['AnalysisType'])
+        options[index] = (row['FileName'], row['AnalysisType'])
 
     return options
+
 
 # Define the pages dictionary
 pages = {
