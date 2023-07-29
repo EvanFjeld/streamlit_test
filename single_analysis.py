@@ -3,10 +3,6 @@ import pandas as pd
 import numpy as np
 import altair as alt
 
-# Constants for AWS S3 access
-AWS_BUCKET_NAME = "s3://carbon-forecaster-capstone-s3/streamlit_data/"
-AWS_REGION = "your-aws-region"
-
 def single_location_files():
     file_name = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/Locations.csv"
     return pd.read_csv(file_name)
@@ -37,6 +33,7 @@ def main():
     # Create a dropdown to select a file from AWS S3
     location_files = single_location_files()
     st.write(location_files)
+    
     selected_location = st.selectbox('Select Location', location_files.Location)
   
     # Filter the DataFrame based on the location
@@ -52,5 +49,4 @@ def main():
         st.error(f"Error reading the file from AWS: {e}")
         return
 
-if __name__ == '__main__':
-    main()
+main()
