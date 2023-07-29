@@ -33,6 +33,9 @@ def about_page():
     st.markdown('# About the Carbon Forecaster')
     st.write("This is the final project for a master's in data science program at UC Berkeley.")
 
+def single_location_basic():
+    st.markdown('# Analysis of a Single Location')
+    st.write("Great!")
 
 def single_location_analysis(placeholder, file, location):
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
@@ -105,7 +108,7 @@ def single_location_names():
     file_name = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/Locations.csv"
     saved_options = pd.read_csv(file_name)
 
-    options = {"-": intro}  # Initialize with the intro function
+    options = {"-": single_location_basic}  # Initialize with the intro function
 
     for index, row in saved_options.iterrows():
         location_name = row["Location"]
