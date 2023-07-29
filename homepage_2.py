@@ -61,26 +61,31 @@ def single_location_landing_page(file, location):
     st.write("Select a location from the dropdown.")
 
 
-def single_location_analysis(placeholder, file, location):
+def single_location_analysis(placeholder, file, location):    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
-
+    
     if placeholder is not None:
         # Display the placeholder if it exists
         placeholder.markdown(f"# {location}")
         placeholder.write("Gpp over time")
-
+    
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
-
+    
+    # Progress bar and status text in the sidebar
+    progress_bar = st.sidebar.progress(0)
+    status_text = st.sidebar.empty()
+    
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    fig = px.line(data_frame=df, x='date', y='Gpp', title=f'Gpp over time - {location}')
-    st.plotly_chart(fig)
+    chart = st.line_chart(data=df, x='date', y='Gpp')
+
+    csv = convert_df(df)
 
     st.download_button(
         label="Download data as CSV",
-        data=df.to_csv().encode('utf-8'),
+        data=csv,
         file_name='gpp_data.csv',
         mime='text/csv',
     )
