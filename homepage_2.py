@@ -107,7 +107,7 @@ def single_lat_long():
     with col2:
         long = st.selectbox("Choose a Longitude", long_options)
 
-@st.cache_data
+#@st.cache_data
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
