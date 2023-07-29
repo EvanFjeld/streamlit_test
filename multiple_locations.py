@@ -3,6 +3,8 @@ import time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import mpld3
+import streamlit.components.v1 as components
 from datetime import datetime
 
 def none_selected(file, num):
@@ -87,10 +89,51 @@ def multiple_location_analysis(file1, file2, location1, location2):
     fig, ax = plt.subplots()
 
     # Plot the first line for 'Gpp_loc1'
-    ax.plot(df['date'], df['Gpp_loc1'], label='Gpp_loc1', color='blue')
+    ax.plot(filtered_df['date'], filtered_df['Gpp_loc1'], label='Gpp_loc1', color='blue')
 
     ## Plot the second line for 'Gpp_loc2'
-    ax.plot(df['date'], df['Gpp_loc2'], label='Gpp_loc2', color='green')
+    ax.plot(filtered_df['date'], filtered_df['Gpp_loc2'], label='Gpp_loc2', color='green')
+
+    # Replace st.pyplot(two_subplot_fig) with this code below! 
+    fig_html = mpld3.fig_to_html(two_subplot_fig)
+    components.html(fig_html, height=600)
+
+    # CODE TO ADD
+    # Define some CSS to control our custom labels
+    css = """
+    table
+    {
+      border-collapse: collapse;
+    }
+    th
+    {
+      color: #ffffff;
+      background-color: #000000;
+    }
+    td
+    {
+      background-color: #cccccc;
+    }
+    table, th, td
+    {
+      font-family:Arial, Helvetica, sans-serif;
+      border: 1px solid black;
+      text-align: right;
+    }
+    """
+    for axes in fig.axes:
+        for line in axes.get_lines():
+            # get the x and y coords
+            xy_data = line.get_xydata()
+            labels = []
+            for x, y in xy_data:
+                # Create a label for each point with the x and y coords
+                html_label = f'<table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> </thead> <tbody> <tr> <th>x</th> <td>{x}</td> </tr> <tr> <th>y</th> <td>{y}</td> </tr> </tbody> </table>'
+                labels.append(html_label)
+            # Create the tooltip with the labels (x and y coords) and attach it to each line with the css specified
+            tooltip = plugins.PointHTMLTooltip(line, labels, css=css)
+            # Since this is a separate plugin, you have to connect it
+            plugins.connect(two_subplot_fig, tooltip)
     
     # Set labels and title
     ax.set_xlabel('Date')
