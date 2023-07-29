@@ -122,7 +122,7 @@ pages = {
     "About": about_page
 }
 
-single_location_to_funcs = single_location_functions()
+single_location_to_funcs = pag_names_functions()
 
 # Check if the app is just starting (no state exists)
 if "initialized" not in st.session_state:
