@@ -29,7 +29,7 @@ def single_location_analysis(file, location):
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     # Convert the 'date' column to datetime type
-    df['date'] = pd.to_datetime(df['date'])
+    df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
