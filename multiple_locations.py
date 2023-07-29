@@ -2,7 +2,7 @@ import streamlit as st
 import time
 import numpy as np
 import pandas as pd
-import altair as alt
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 def none_selected(file, num):
@@ -84,27 +84,21 @@ def multiple_location_analysis(file1, file2, location1, location2):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
 
-    # Create the Altair chart
-    chart = alt.Chart(filtered_df).mark_line().encode(
-        x='date:T',  # Use :T to indicate that the 'date' column contains datetime data
-        y=alt.Y('Gpp_loc1:Q', title='Gpp_loc1'),  # Use :Q to indicate quantitative (numeric) data
-        y2=alt.Y2('Gpp_loc2:Q', title='Gpp_loc2'),  # Add the second y-axis for the second line
-        tooltip=['date:T', 'Gpp_loc1:Q', 'Gpp_loc2:Q']  # Add tooltip for displaying values on hover
-    ).properties(
-        width=800,
-        height=400
-    )
+    fig, ax = plt.subplots()
 
-    # Configure the second y-axis
-    chart = chart.configure_mark(opacity=0.6).configure_axisRight().configure_axisLeft(labelColor='blue')
+    # Plot the first line for 'Gpp_loc1'
+    ax.plot(df['date'], df['Gpp_loc1'], label='Gpp_loc1', color='blue')
 
-    # Display the chart
-    st.altair_chart(chart, use_container_width=True)
+    ## Plot the second line for 'Gpp_loc2'
+    ax.plot(df['date'], df['Gpp_loc2'], label='Gpp_loc2', color='green')
+    
+    # Set labels and title
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Gpp')
+    ax.set_title('Gpp Data Visualization')
 
-    # # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    # chart = st.line_chart(data=filtered_df, x='date', y='Gpp_loc1')
-    # # Add a second line to the chart with 'Date' as the x-axis and 'Gpp_loc2' as the y-axis
-    # chart.line_chart(data=filtered_df, x='date', y='Gpp_loc2')
+    ax.legand()
+    plt.show()
 
     csv = convert_df(df)
 
