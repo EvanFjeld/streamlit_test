@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-#import single_analysis
+import single_analysis
 
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
@@ -9,6 +9,7 @@ def intro():
 def single_analysis_page():
     st.markdown('# Here is an analysis of a single pre-defined location')
     st.write("What to know when you compare locations.")
+    single_analysis
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
