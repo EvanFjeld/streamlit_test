@@ -1,52 +1,80 @@
+#pip install git+https://github.com/streamlit/files-connection
+#from st_files_connection import FilesConnection
 import streamlit as st
-import pandas as pd
-import numpy as np
-import altair as alt
 
-def single_location_files():
-    file_name = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/Locations.csv"
-    return pd.read_csv(file_name)
+def intro(file, num):
+    import streamlit as st
 
-# Helper function to read data from AWS S3
-def read_data_from_aws(file_name):
+    st.write("# Boreal Forest Carbon Caolculator")
+
+    st.markdown(
+        """
+        Welcome to the Boreal Forest Carbon Calculator
+    """
+    )
+
+def single_location_analysis(file, location):
+    import streamlit as st
+    import time
+    import numpy as np
+    import pandas as pd
+
+    st.markdown(f'# {location_name}')
+    st.write(
+        """
+        Gpp over time
+"""
+    )
+
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
-    return df
+    
+    # Create the Streamlit app
+    st.title("Gpp Data Visualization")
+    
+    # Progress bar and status text in the sidebar
+    progress_bar = st.sidebar.progress(0)
+    status_text = st.sidebar.empty()
+    
+    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
+    chart = st.line_chart(data=df, x='date', y='Gpp')
 
-# Plot the graph based on the selected option
-def plot_graph(selected_option, data):
-    filtered_data = data[data['X'] <= selected_option]
+    csv = convert_df(df)
 
-    chart = alt.Chart(filtered_data).mark_line().encode(
-        x='date',
-        y='Gpp'
-    ).properties(
-        title=f'Graph for X <= {selected_option}'
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='gpp_data.csv',
+        mime='text/csv',
     )
 
-    st.altair_chart(chart, use_container_width=True)
 
-def main():
-    st.title('Graph Gpp Data from AWS S3')
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
 
-    # Create a dropdown to select a file from AWS S3
-    location_files = single_location_files
-    selected_location = st.selectbox('Select Location', , location_files['Location'])
-    st.write(location_files)
+def pag_names_functions(file):
+    import pandas as pd
     
+    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    file_name = "/streamlit_data/" + file + ".csv"
+    saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
-  
-    # # Filter the DataFrame based on the location
-    # filtered_df = df.loc[df['Location'] == selected_location]
+    saved_options['AnalysisType'] = single_location_analysis
+    saved_options= saved_options.set_index('Location')
     
-    # # Get the filename for the specific location
-    # filename_for_location = filtered_df['filename'].values[0]
+    options = {"-": ["", intro]}
+    
+    for index, row in saved_options.iterrows():
+        row_as_list = row.tolist()
+        options[index] =  row_as_list
+    
+    return options
 
-    # # Read data from AWS S3 based on the selected file
-    # try:
-    #     df = read_data_from_aws(filename_for_location)
-    # except Exception as e:
-    #     st.error(f"Error reading the file from AWS: {e}")
 
-main()
+page_names_to_funcs = pag_names_functions("Locations")
+
+location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
+page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
