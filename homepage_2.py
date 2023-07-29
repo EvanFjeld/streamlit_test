@@ -95,7 +95,7 @@ def get_lat_long_options():
     return pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Lat_Long_Locations.csv")
 
 def single_location_names():
-    file_name = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/Locations.csv
+    file_name = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/Locations.csv"
     saved_options = pd.read_csv(file_name)
 
     saved_options['AnalysisType'] = single_location_analysis
