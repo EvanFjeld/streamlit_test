@@ -17,11 +17,6 @@ def none_selected(file, num):
 
 def single_location_analysis(file, location):
     st.markdown(f'# {location_name}')
-    st.write(
-        """
-        Gpp over time
-    """
-    )
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
@@ -32,8 +27,17 @@ def single_location_analysis(file, location):
     df['date'] = pd.to_datetime(df.date)
 
     min_date = df.date.min().to_pydatetime()
-    st.write("Starting date:", min_date)
     max_date = df.date.max().to_pydatetime()
+    start_month = min_date.strftime("%B")
+    start_year = min_date.year
+    end_month = max_date.strftime("%B")
+    end_year = max_date.year
+    
+    st.write(f'Here is the analysis and forecast for {location_name}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
+    
+    
+    st.write("Starting date:", min_date)
+    
     st.write("Max date:", max_date)
     
     # Create the Streamlit app
