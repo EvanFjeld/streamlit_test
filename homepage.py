@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 
 def none_selected(file, num):
-    st.write("Don't know the location name?:)
+    st.write("Don't know the location name?")
     st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
 
     col1, col2 = st.columns(2)
