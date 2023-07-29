@@ -2,6 +2,7 @@ import streamlit as st
 import time
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 def none_selected(file, num):
     import streamlit as st
@@ -15,16 +16,12 @@ def none_selected(file, num):
     )
 
 def single_location_analysis(file, location):
-
-
     st.markdown(f'# {location_name}')
     st.write(
         """
         Gpp over time
     """
     )
-
-
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
@@ -41,7 +38,9 @@ def single_location_analysis(file, location):
     
     # Create the sliders
     start_date = st.slider("Start Date", min_date, max_date, min_date)
+    st.write("Starting date:", start_date)
     end_date = st.slider("End Date", min_date, max_date, max_date)
+    st.write("Ending date:", end_date)
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
