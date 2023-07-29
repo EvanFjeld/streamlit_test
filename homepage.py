@@ -32,7 +32,9 @@ def single_location_analysis(file, location):
     df['date'] = pd.to_datetime(df.date)
 
     min_date = df.date.min()
+    st.write("Starting date:", min_date)
     max_date = df.date.max()
+    st.write("Max date:", max_date)
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
