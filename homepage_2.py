@@ -106,17 +106,16 @@ def get_lat_long_options():
 
 def single_location_names():
     file_name = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/Locations.csv"
-    saved_options = pd.read_csv(file_name)
-
-    options = {"-": single_location_basic}  # Initialize with the intro function
-
+    saved_options['AnalysisType'] = single_location_analysis
+    saved_options= saved_options.set_index('Location')
+    
+    options = {"-": ["", intro]}
+    
     for index, row in saved_options.iterrows():
-        location_name = row["Location"]
-        analysis_function = single_location_analysis  # Assuming you want to use single_location_analysis for all locations
-        options[location_name] = analysis_function
-
+        row_as_list = row.tolist()
+        options[index] =  row_as_list
+    
     return options
-
 
 
 # Define the pages dictionary
