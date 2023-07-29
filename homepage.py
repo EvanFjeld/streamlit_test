@@ -113,11 +113,11 @@ page_names_to_funcs = pag_names_functions("Locations")
 #     "Location 2": [single_location_analysis, "location2"],
 # }
 
-st.write("# Boreal Forest Carbon Caolculator")
+st.write("# Boreal Forecast GPP Forecast")
 
 st.markdown(
     """
-    Welcome to the Boreal Forest Carbon Calculator. Select a location to view analysis and a forecast of GPP in that area. 
+    Welcome to the Boreal Forest Carbon Calculator. Here you can analyze a single location of the Boreal Forest. 
 """
 )
 
