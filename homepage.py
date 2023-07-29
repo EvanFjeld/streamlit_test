@@ -1,29 +1,27 @@
-#pip install git+https://github.com/streamlit/files-connection
-#from st_files_connection import FilesConnection
 import streamlit as st
+import time
+import numpy as np
+import pandas as pd
 
-def intro(file, num):
+def none_selected(file, num):
     import streamlit as st
 
-    st.write("# Boreal Forest Carbon Caolculator")
+    st.write("## Select a location")
 
     st.markdown(
         """
-        Welcome to the Boreal Forest Carbon Calculator
+        Welcome to the Boreal Forest Carbon Calculator. Select a location to view analysis and a forecast of GPP in that area. 
     """
     )
 
 def single_location_analysis(file, location):
-    import streamlit as st
-    import time
-    import numpy as np
-    import pandas as pd
+
 
     st.markdown(f'# {location_name}')
     st.write(
         """
         Gpp over time
-"""
+    """
     )
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
@@ -33,12 +31,19 @@ def single_location_analysis(file, location):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
     
-    # Progress bar and status text in the sidebar
-    progress_bar = st.sidebar.progress(0)
-    status_text = st.sidebar.empty()
-    
+    # Get the min and max date values from the DataFrame
+    min_date = pd.to_datetime(df['date'].min())
+    max_date = pd.to_datetime(df['date'].max())
+
+    # Add a slider to select the date range
+    start_date = st.slider("Select start date", min_date, max_date, min_date)
+    end_date = st.slider("Select end date", start_date, max_date, max_date)
+
+    # Filter the DataFrame based on the selected date range
+    filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
+
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=df, x='date', y='Gpp')
+    chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
 
     csv = convert_df(df)
 
@@ -65,7 +70,7 @@ def pag_names_functions(file):
     saved_options['AnalysisType'] = single_location_analysis
     saved_options= saved_options.set_index('Location')
     
-    options = {"-": ["", intro]}
+    options = {"-": ["", none_selected]}
     
     for index, row in saved_options.iterrows():
         row_as_list = row.tolist()
@@ -81,6 +86,14 @@ page_names_to_funcs = pag_names_functions("Locations")
 #     "Location 1": [single_location_analysis, "test"],
 #     "Location 2": [single_location_analysis, "location2"],
 # }
+
+st.write("# Boreal Forest Carbon Caolculator")
+
+st.markdown(
+    """
+    Welcome to the Boreal Forest Carbon Calculator. Select a location to view analysis and a forecast of GPP in that area. 
+"""
+)
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
