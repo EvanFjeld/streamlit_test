@@ -28,6 +28,11 @@ def single_location_landing_page(file, location):
     st.write("Gpp over time")
     st.write("Select a location from the dropdown.")
 
+def about_page():
+    st.markdown('# About the Carbon Forecaster')
+    st.write("This is the final project for a master's in data science program at UC Berkeley.")
+
+
 def single_location_analysis(placeholder, file, location):
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
