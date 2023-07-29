@@ -10,6 +10,22 @@ def single_analysis_page():
     # Call the single_analysis.py script using subprocess
     single_analysis.single_analysis_page()
 
+def location_comparison_page():
+    st.markdown('# This page is meant to compare multiple locations')
+    st.write("What to know when you compare locations.")
+
+def single_location_page():
+    st.markdown('# Analysis of a Single Location')
+    st.write("Great!")
+
+def single_lat_long():
+    st.markdown('# Explore Lat/Long')
+    st.write("Exploring Lat/Long.")
+
+def about_page():
+    st.markdown('# About the Carbon Forecaster')
+    st.write("This is the final project for a master's in data science program at UC Berkeley.")
+
 # Define the pages dictionary
 pages = {
     "Homepage": intro,
