@@ -7,7 +7,7 @@ def intro():
     st.markdown("Welcome to the Boreal Forest Carbon Calculator")
 
 def single_analysis_page():
-    st.markdown('# This page is meant to compare multiple locations')
+    st.markdown('# Here is an analysis of a single pre-defined location')
     st.write("What to know when you compare locations.")
 
 def location_comparison_page():
