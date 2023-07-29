@@ -33,14 +33,15 @@ def single_location_analysis(file, location):
     # Convert the 'date' column to datetime type
     df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
 
-    st.write("Min Date is " , df.date.min())
+    min_date = df.date.min()
+    max_date = df.date.max()
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
     
     # Create the sliders
-    start_date = st.slider("Start Date", df.date.min(), df.date.max())
-    end_date = st.slider("End Date", df.date.min(), df.date.max())
+    start_date = st.slider("Start Date", min_date, max_date, min_date)
+    end_date = st.slider("End Date", , min_date, max_date, max_date)
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
@@ -103,8 +104,8 @@ st.markdown(
 """
 )
 
-age = st.slider('How old are you?', 0, 130, 25)
-st.write("I'm ", age, 'years old')
+# age = st.slider('How old are you?', 0, 130, 25)
+# st.write("I'm ", age, 'years old')
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
