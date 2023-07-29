@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import mpld3
+from mpld3 import plugins
 import streamlit.components.v1 as components
 from datetime import datetime
 
