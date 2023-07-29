@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import single_analysis
-import streamlit.script_runner as script_runner
 
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
@@ -10,7 +9,7 @@ def intro():
 def single_analysis_page():
     st.markdown('# Here is an analysis of a single pre-defined location')
     st.write("What to know when you compare locations.")
-    script_runner.script_run("single_analysis.py")
+    single_analysis.main()
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
@@ -39,9 +38,7 @@ if "initialized" not in st.session_state:
     intro()  # Display the homepage by default
 
 st.sidebar.button("Homepage", on_click=intro)
-#st.sidebar.button("Single Location", on_click=single_analysis_page)
-if st.sidebar.button("Single Analysis Page"):
-    single_analysis_page()
+st.sidebar.button("Single Location", on_click=single_analysis_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
 st.sidebar.button("Explore Lat/Long", on_click=single_lat_long)
 st.sidebar.button("About", on_click=about_page)
