@@ -109,8 +109,16 @@ def single_lat_long():
     filtered_df = df.loc[df['Lat'] == lat]
     long_options = filtered_df.Long.unique()
 
+    # Check if the selected longitude is in the session state, if not, initialize it to the first option
+    if "selected_long" not in st.session_state:
+        st.session_state.selected_long = long_options[0]
+
     # Display the longitude selectbox
-    long = st.selectbox("Choose a Longitude", long_options)
+    long = st.selectbox("Choose a Longitude", long_options, index=long_options.tolist().index(st.session_state.selected_long))
+
+    # Update the selected longitude in the session state
+    st.session_state.selected_long = long
+
 
 #@st.cache_data
 def convert_df(df):
