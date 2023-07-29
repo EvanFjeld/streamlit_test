@@ -83,10 +83,27 @@ def multiple_location_analysis(file1, file2, location1, location2):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
 
-    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=filtered_df, x='date', y='Gpp_loc1')
-    # Add a second line to the chart with 'Date' as the x-axis and 'Gpp_loc2' as the y-axis
-    chart.line_chart(data=filtered_df, x='date', y='Gpp_loc2')
+    # Create the Altair chart
+    chart = alt.Chart(filtered_df).mark_line().encode(
+        x='date:T',  # Use :T to indicate that the 'date' column contains datetime data
+        y=alt.Y('Gpp_loc1:Q', title='Gpp_loc1'),  # Use :Q to indicate quantitative (numeric) data
+        y2=alt.Y2('Gpp_loc2:Q', title='Gpp_loc2'),  # Add the second y-axis for the second line
+        tooltip=['date:T', 'Gpp_loc1:Q', 'Gpp_loc2:Q']  # Add tooltip for displaying values on hover
+    ).properties(
+        width=800,
+        height=400
+    )
+
+    # Configure the second y-axis
+    chart = chart.configure_mark(opacity=0.6).configure_axisRight().configure_axisLeft(labelColor='blue')
+
+    # Display the chart
+    st.altair_chart(chart, use_container_width=True)
+
+    # # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
+    # chart = st.line_chart(data=filtered_df, x='date', y='Gpp_loc1')
+    # # Add a second line to the chart with 'Date' as the x-axis and 'Gpp_loc2' as the y-axis
+    # chart.line_chart(data=filtered_df, x='date', y='Gpp_loc2')
 
     csv = convert_df(df)
 
