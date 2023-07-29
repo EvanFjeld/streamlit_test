@@ -94,18 +94,22 @@ def get_lat_long_options():
     file_name = "/streamlit_data/location_files/Lat_Long_Locations.csv"
     return pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Lat_Long_Locations.csv")
 
-def single_location_functions(file):
+def pag_names_functions(file):
+    import pandas as pd
+    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     saved_options['AnalysisType'] = single_location_analysis
-    saved_options = saved_options.set_index('Location')
-
-    options = {}
+    saved_options= saved_options.set_index('Location')
+    
+    options = {"-": ["", intro]}
+    
     for index, row in saved_options.iterrows():
-        options[index] = (row['FileName'], row['AnalysisType'])
-
+        row_as_list = row.tolist()
+        options[index] =  row_as_list
+    
     return options
 
 
