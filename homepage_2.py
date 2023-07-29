@@ -39,7 +39,9 @@ if "initialized" not in st.session_state:
     intro()  # Display the homepage by default
 
 st.sidebar.button("Homepage", on_click=intro)
-st.sidebar.button("Single Location", on_click=single_analysis_page)
+#st.sidebar.button("Single Location", on_click=single_analysis_page)
+if st.sidebar.button("Single Analysis Page"):
+    single_analysis_page()
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
 st.sidebar.button("Explore Lat/Long", on_click=single_lat_long)
 st.sidebar.button("About", on_click=about_page)
