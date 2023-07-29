@@ -1,7 +1,7 @@
 #pip install git+https://github.com/streamlit/files-connection
 #from st_files_connection import FilesConnection
 import streamlit as st
-import plotly.express as px
+#import plotly.express as px
 import time
 import numpy as np
 import pandas as pd
