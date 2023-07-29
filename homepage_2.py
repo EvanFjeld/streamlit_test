@@ -6,8 +6,8 @@ def intro():
     st.markdown("Welcome to the Boreal Forest Carbon Calculator")
 
 def single_location_nav(page_names_to_funcs):
-    location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
-    page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+    location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
+    single_location_to_funcs[location_name][1](single_location_to_funcs[location_name][0], location_name)
 
 def single_location_page():
     st.markdown('# Analysis of a Single Location')
