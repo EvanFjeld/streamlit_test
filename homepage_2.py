@@ -22,7 +22,7 @@ def single_location_nav():
     page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 
 def single_location_page():
-        st.markdown('# Analysis of a Single Location')
+    st.markdown('# Analysis of a Single Location')
     st.write(
         """
         Great
