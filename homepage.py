@@ -10,9 +10,9 @@ def none_selected(file, num):
 
     col1, col2 = st.columns(2)
     with col1:
-        lat = st.selectbox("Choose a location", page_names_to_funcs.keys())
+        lat = st.selectbox("Select Latitude", page_names_to_funcs.keys())
     with col2:
-        long = st.selectbox("Choose a location", page_names_to_funcs.keys())
+        long = st.selectbox("Select Longitude", page_names_to_funcs.keys())
         
 
 def single_location_analysis(file, location):
