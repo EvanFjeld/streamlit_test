@@ -34,22 +34,9 @@ def single_location_analysis(file, location):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
     
-    # Get the min and max date values from the DataFrame
-    min_date = df['date'].min()
-    max_date = df['date'].max()
-
-    # Get the start and end date values from the slider
-    start_date_str, end_date_str = st.slider(
-        "Select date range",
-        min_value=min_date,
-        max_value=max_date,
-        value=(min_date, max_date),
-        format="YYYY-MM"
-    )
-    
-    # Convert the start and end date strings to datetime objects
-    start_date = pd.to_datetime(start_date_str.to_timestamp())
-    end_date = pd.to_datetime(end_date_str.to_timestamp())
+    # Create the sliders
+    start_date = st.slider("Start Date", df.date.min(), df.date.max())
+    end_date = st.slider("End Date", df.date.min(), df.date.max())
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
@@ -58,7 +45,11 @@ def single_location_analysis(file, location):
     st.title("Gpp Data Visualization")
 
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
+    # chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
+    # Plot the graph
+    plt.plot(df["date"], df["Gpp"])
+    plt.xlim([start_date, end_date])
+    plt.show()
 
     csv = convert_df(df)
 
