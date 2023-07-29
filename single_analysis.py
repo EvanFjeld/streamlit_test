@@ -9,12 +9,18 @@ def none_selected(options_df):
     st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
 
     #options_df = options_df[["Lat","Long","filename"]]
+    lat_options = list(options_df.Lat.unique())
+    long_options = (options_df.Long.unique())
+    lat = "-"
+    long = "-"
 
     col1, col2 = st.columns(2)
     with col1:
-        lat = st.selectbox("Select Latitude", page_names_to_funcs.keys())
+        if long != "-": lat_options = [x for x in long_options if x != long]
+        lat = st.selectbox("Select Latitude", lat_options)
     with col2:
-        long = st.selectbox("Select Longitude", page_names_to_funcs.keys())
+        if lat != "-": long_options = [x for x in lat_options if x != lat]
+        long = st.selectbox("Select Longitude", long_options)
 
     file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
     location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
