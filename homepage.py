@@ -34,11 +34,8 @@ def single_location_analysis(file, location):
     end_year = max_date.year
     
     st.write(f'Here is the analysis and forecast for {location_name}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    
-    
-    st.write("Starting date:", min_date)
-    
-    st.write("Max date:", max_date)
+    # st.write("Starting date:", min_date)
+    # st.write("Max date:", max_date)
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
