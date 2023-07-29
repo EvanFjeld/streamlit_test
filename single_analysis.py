@@ -1,17 +1,7 @@
-#pip install git+https://github.com/streamlit/files-connection
-#from st_files_connection import FilesConnection
 import streamlit as st
 
-def intro(file, num):
-    import streamlit as st
-
-    st.write("# Boreal Forest Carbon Caolculator")
-
-    st.markdown(
-        """
-        Welcome to the Boreal Forest Carbon Calculator
-    """
-    )
+def intro():
+    st.write("Select a location")
 
 def single_location_analysis(file, location):
     import streamlit as st
@@ -45,8 +35,6 @@ def single_location_analysis(file, location):
         mime='text/csv',
     )
 
-
-@st.cache
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
