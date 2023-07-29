@@ -1,6 +1,7 @@
 #pip install git+https://github.com/streamlit/files-connection
 #from st_files_connection import FilesConnection
 import streamlit as st
+import plotly.express as px
 import time
 import numpy as np
 import pandas as pd
@@ -61,30 +62,25 @@ def single_location_landing_page(file, location):
 
 
 def single_location_analysis(placeholder, file, location):
+    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    file_name = "/streamlit_data/" + file + ".csv"
+    df = pd.read_csv(AWS_BUCKET_URL + file_name)
+
     if placeholder is not None:
         # Display the placeholder if it exists
         placeholder.markdown(f"# {location}")
         placeholder.write("Gpp over time")
-    
-    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/" + file + ".csv"
-    df = pd.read_csv(AWS_BUCKET_URL + file_name)
-    
+
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
-    
-    # Progress bar and status text in the sidebar
-    progress_bar = st.sidebar.progress(0)
-    status_text = st.sidebar.empty()
-    
-    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=df, x='date', y='Gpp')
 
-    csv = convert_df(df)
+    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
+    fig = px.line(data_frame=df, x='date', y='Gpp', title=f'Gpp over time - {location}')
+    st.plotly_chart(fig)
 
     st.download_button(
         label="Download data as CSV",
-        data=csv,
+        data=df.to_csv().encode('utf-8'),
         file_name='gpp_data.csv',
         mime='text/csv',
     )
