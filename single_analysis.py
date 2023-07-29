@@ -36,7 +36,7 @@ def main():
 
     # Create a dropdown to select a file from AWS S3
     location_files = single_location_files()
-    selected_location = st.selectbox('Select Location', location_files.filename)
+    selected_location = st.selectbox('Select Location', location_files.Location)
   
     # Filter the DataFrame based on the location
     filtered_df = df.loc[df['Location'] == selected_location]
