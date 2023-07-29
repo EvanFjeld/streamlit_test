@@ -1,75 +1,49 @@
-#pip install git+https://github.com/streamlit/files-connection
-#from st_files_connection import FilesConnection
 import streamlit as st
-#import plotly.express as px
-import time
-import numpy as np
 import pandas as pd
 
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
+    st.markdown("Welcome to the Boreal Forest Carbon Calculator")
 
-    st.markdown(
-        """
-        Welcome to the Boreal Forest Carbon Calculator
-    """
-    )
-
-def single_location_nav():
-    page_names_to_funcs = pag_names_functions("Locations")
-    
+def single_location_nav(page_names_to_funcs):
     location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
     page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 
 def single_location_page():
     st.markdown('# Analysis of a Single Location')
-    st.write(
-        """
-        Great
-    """
-    )
-    
-    single_location_nav()
+    st.write("Great!")
+    single_location_nav(single_location_to_funcs)
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
-    st.write(
-        """
-        What to know when you compare locations.
-    """
-    )
+    st.write("What to know when you compare locations.")
 
 def about_page():
     st.markdown('# About the Carbon Forecaster')
-    st.write(
-        """
-        This is the final project for a masters in data science program at UC Berkeley.
-    """
-    )
+    st.write("This is the final project for a master's in data science program at UC Berkeley.")
 
 def single_location_landing_page(file, location):
     st.markdown(f"# {location}")
     st.write("Gpp over time")
     st.write("Select a location from the dropdown.")
 
-
-def single_location_analysis(placeholder, file, location):    
+def single_location_analysis(placeholder, file, location):
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
-    
+
     if placeholder is not None:
         # Display the placeholder if it exists
         placeholder.markdown(f"# {location}")
         placeholder.write("Gpp over time")
-    
+
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
-    
+
     # Progress bar and status text in the sidebar
     progress_bar = st.sidebar.progress(0)
     status_text = st.sidebar.empty()
-    
+
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
     chart = st.line_chart(data=df, x='date', y='Gpp')
 
@@ -84,13 +58,13 @@ def single_location_analysis(placeholder, file, location):
 
 def single_lat_long():
     df = get_lat_long_options()
-    
+
     lat_options = df.Lat.unique()
-    
+
     # Check if the selected latitude is in the session state, if not, initialize it to the first option
     if "selected_lat" not in st.session_state:
         st.session_state.selected_lat = lat_options[0]
-    
+
     # Display the latitude selectbox
     lat = st.selectbox("Choose a Latitude", lat_options, index=lat_options.tolist().index(st.session_state.selected_lat))
 
@@ -111,8 +85,6 @@ def single_lat_long():
     # Update the selected longitude in the session state
     st.session_state.selected_long = long
 
-
-#@st.cache_data
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
@@ -121,25 +93,19 @@ def get_lat_long_options():
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/location_files/Lat_Long_Locations.csv"
     return pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Lat_Long_Locations.csv")
-    
 
 def single_location_functions(file):
-    import pandas as pd
-    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     saved_options['AnalysisType'] = single_location_analysis
-    saved_options= saved_options.set_index('Location')
-    
-    # options = {{"-": ["", ""]}}
+    saved_options = saved_options.set_index('Location')
+
     options = {}
-    
     for index, row in saved_options.iterrows():
-        row_as_list = row.tolist()
-        options[index] =  row_as_list
-    
+        options[index] = (row['file'], row['AnalysisType'])
+
     return options
 
 # Define the pages dictionary
@@ -163,4 +129,3 @@ st.sidebar.button("Single Location", on_click=single_location_page)
 st.sidebar.button("Location Comparison", on_click=location_comparison_page)
 st.sidebar.button("Explore Lat/Long", on_click=single_lat_long)
 st.sidebar.button("About", on_click=about_page)
-
