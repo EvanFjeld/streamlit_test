@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import single_analysis
+#import single_analysis
 
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
@@ -25,7 +25,7 @@ def about_page():
 # Define the pages dictionary
 pages = {
     "Homepage": intro,
-    "Single Location": single_location_page,
+    "Single Location": single_analysis_page,
     "Location Comparison": location_comparison_page,
     "Explore Lat/Long": single_lat_long,
     "About": about_page
