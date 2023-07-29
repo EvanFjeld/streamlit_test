@@ -2,6 +2,7 @@ import streamlit as st
 import time
 import numpy as np
 import pandas as pd
+import altair as alt
 from datetime import datetime
 
 def none_selected(file, num):
@@ -172,6 +173,6 @@ with loc_col2:
   if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
   location_2_name = st.selectbox("Choose the second location", location2_options)
 
-st.write(f'{location_1_name} file {options[location_1_name][0]}')
+#st.write(f'{location_1_name} file {options[location_1_name][0]}')
 
 multiple_location_analysis(options[location_1_name][0], options[location_2_name][0], location_1_name, location_2_name)
