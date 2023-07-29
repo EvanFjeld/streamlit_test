@@ -28,7 +28,8 @@ def single_location_analysis(file, location):
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     # Convert the 'date' column to datetime type
-    df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
+    #df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
+    df['date'] = pd.to_datetime(df.date)
 
     min_date = df.date.min()
     max_date = df.date.max()
@@ -37,7 +38,7 @@ def single_location_analysis(file, location):
     st.title("Gpp Data Visualization")
     
     # Create the sliders
-    start_date = st.slider("Start Date", min_value = min_date, max_value=max_date, value = min_date, format = "YYYY-MM")
+    start_date = st.slider("Start Date", min_value = min_date, max_value=max_date, value = min_date, format = "YYYY-MM-DD")
     st.write("Starting date:", start_date)
     #end_date = st.slider("End Date", min_date, max_date, value=max_date, format="YYYY-MM")
     #st.write("Ending date:", end_date)
