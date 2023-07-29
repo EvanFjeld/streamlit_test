@@ -15,26 +15,14 @@ def intro():
     """
     )
 
+def single_location_nav():
+    page_names_to_funcs = pag_names_functions("Locations")
+    
+    location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
+    page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+
 def single_location_page():
-    location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
-
-    if "selected_location" not in st.session_state:
-        st.session_state.selected_location = None
-
-    if st.session_state.selected_location != location_name:
-        # Clear the previous selection and re-initialize the graph
-        st.session_state.selected_location = location_name
-        st.session_state.graph_initialized = False
-
-    # Check if the graph needs to be initialized
-    if not st.session_state.get("graph_initialized", False):
-        # Initialize an empty placeholder for the graph
-        graph_placeholder = st.empty()
-        single_location_analysis(graph_placeholder, single_location_to_funcs[location_name][0], location_name)
-        st.session_state.graph_initialized = True
-    else:
-        # If graph is already initialized, update the existing graph with new data
-        single_location_analysis(None, single_location_to_funcs[location_name][0], location_name)
+    single_location_nav()
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
