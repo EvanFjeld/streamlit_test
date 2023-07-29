@@ -86,32 +86,35 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
-def pag_names_functions(file):
-    import pandas as pd
+# def pag_names_functions(file):
+#     import pandas as pd
     
-    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/" + file + ".csv"
-    saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
+#     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+#     file_name = "/streamlit_data/" + file + ".csv"
+#     saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
 
-    saved_options['AnalysisType'] = single_location_analysis
-    saved_options= saved_options.set_index('Location')
+#     saved_options['AnalysisType'] = single_location_analysis
+#     saved_options= saved_options.set_index('Location')
     
-    options = {"-": ["", none_selected]}
+#     options = {"-": ["", none_selected]}
     
-    for index, row in saved_options.iterrows():
-        row_as_list = row.tolist()
-        options[index] =  row_as_list
+#     for index, row in saved_options.iterrows():
+#         row_as_list = row.tolist()
+#         options[index] =  row_as_list
     
-    return options
+#     return options
 
 
-page_names_to_funcs = pag_names_functions("Locations")
+#page_names_to_funcs = pag_names_functions("Locations")
 
-# page_names_to_funcs = {
-#     "—": [intro, ""],
-#     "Location 1": [single_location_analysis, "test"],
-#     "Location 2": [single_location_analysis, "location2"],
-# }
+options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
+locations_df = options_df[['Location', 'filename']].set_index('Location')
+
+options = {"-": [""]}
+
+for index, row in locations_df.iterrows():
+    row_as_list = row.tolist()
+    options[index] =  row_as_list
 
 st.write("# Boreal Forecast GPP Forecast")
 
@@ -126,4 +129,5 @@ st.markdown(
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
-page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+#page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+single_location_analysis(options[location_name][0], location_name)
