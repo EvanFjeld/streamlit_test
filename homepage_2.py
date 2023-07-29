@@ -8,7 +8,7 @@ def intro():
 
 def single_analysis_page():
     # Call the single_analysis.py script using subprocess
-    single_analysis.run(["streamlit", "run", "single_analysis.py"])
+    single_analysis.single_analysis_page()
 
 # Define the pages dictionary
 pages = {
