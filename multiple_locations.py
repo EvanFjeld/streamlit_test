@@ -21,8 +21,9 @@ def none_selected(file, num):
         
 
 def multiple_location_analysis(file1, file2, location1, location2):
-    if location1 == "-" or location2 = "-":
+    if location1 == "-" or location2 == "-":
         st.markdown(f'# Select a Location')
+        return ""
     
     st.markdown(f'# {location1} & {location2}')
     
