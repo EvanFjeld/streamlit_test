@@ -5,8 +5,7 @@ def intro():
     st.write("# Boreal Forest Carbon Calculator")
     st.markdown("Welcome to the Boreal Forest Carbon Calculator")
 
-def single_location_nav(page_names_to_funcs):
-    location_name = st.selectbox("Choose a location", single_location_to_funcs.keys())
+def single_location_nav(location_name):
     single_location_to_funcs[location_name][1](single_location_to_funcs[location_name][0], location_name)
 
 def single_location_page():
@@ -18,9 +17,11 @@ def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
     st.write("What to know when you compare locations.")
 
-def about_page():
-    st.markdown('# About the Carbon Forecaster')
-    st.write("This is the final project for a master's in data science program at UC Berkeley.")
+def single_location_page():
+    st.markdown('# Analysis of a Single Location')
+    st.write("Great!")
+    location_name = st.selectbox("Choose a location", list(single_location_to_funcs.keys()))
+    single_location_nav(location_name)
 
 def single_location_landing_page(file, location):
     st.markdown(f"# {location}")
