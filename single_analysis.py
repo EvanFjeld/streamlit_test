@@ -1,14 +1,12 @@
 import streamlit as st
+import time
+import numpy as np
+import pandas as pd
 
-def intro():
+def intro(x, y):
     st.write("Select a location")
 
 def single_location_analysis(file, location):
-    import streamlit as st
-    import time
-    import numpy as np
-    import pandas as pd
-
     st.markdown(f'# {location_name}')
     st.write(
         """
