@@ -33,11 +33,8 @@ def single_location_page():
         single_location_analysis(graph_placeholder, single_location_to_funcs[location_name][0], location_name)
         st.session_state.graph_initialized = True
     else:
-        # If graph is already initialized, display the existing graph
+        # If graph is already initialized, update the existing graph with new data
         single_location_analysis(None, single_location_to_funcs[location_name][0], location_name)
-
-
-
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
