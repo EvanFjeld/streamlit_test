@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import single_analysis as sa
+import single_analysis
 
 def intro():
     st.write("# Boreal Forest Carbon Calculator")
@@ -8,7 +8,7 @@ def intro():
 
 def single_analysis_page():
     # Call the single_analysis.py script using subprocess
-    subprocess.run(["streamlit", "run", "single_analysis.py"])
+    single_analysis.run(["streamlit", "run", "single_analysis.py"])
 
 # Define the pages dictionary
 pages = {
