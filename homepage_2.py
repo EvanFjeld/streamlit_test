@@ -20,6 +20,7 @@ def location_comparison_page():
 def single_location_page():
     st.markdown('# Analysis of a Single Location')
     st.write("Great!")
+    single_location_to_funcs = single_location_names()
     location_name = st.selectbox("Choose a location", list(single_location_to_funcs.keys()))
     single_location_nav(location_name)
 
@@ -123,8 +124,6 @@ pages = {
     "Explore Lat/Long": single_lat_long,
     "About": about_page
 }
-
-single_location_to_funcs = single_location_names()
 
 # Check if the app is just starting (no state exists)
 if "initialized" not in st.session_state:
