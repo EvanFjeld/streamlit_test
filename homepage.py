@@ -5,15 +5,15 @@ import pandas as pd
 from datetime import datetime
 
 def none_selected(file, num):
-    import streamlit as st
-
     st.write("## Select a location")
+    st.markdown('Welcome to the Boreal Forest Carbon Calculator. Select a location to view analysis and a forecast of GPP in that area or select a latitude and longitude below.')
 
-    st.markdown(
-        """
-        Welcome to the Boreal Forest Carbon Calculator. Select a location to view analysis and a forecast of GPP in that area. 
-    """
-    )
+    col1, col2 = st.columns(2)
+    with col1:
+        lat = st.selectbox("Choose a location", page_names_to_funcs.keys())
+    with col2:
+        long = st.selectbox("Choose a location", page_names_to_funcs.keys())
+        
 
 def single_location_analysis(file, location):
     st.markdown(f'# {location_name}')
