@@ -27,24 +27,26 @@ def single_location_analysis(file, location):
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
+
+    # Convert the 'date' column to datetime type
+    df['date'] = pd.to_datetime(df['date'])
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
     
     # Get the min and max date values from the DataFrame
-    min_date = pd.to_datetime(df['date'].min()).timestamp()
-    max_date = pd.to_datetime(df['date'].max()).timestamp()
+    min_date = df['date'].min()
+    max_date = df['date'].max()
 
     # Add a slider to select the date range
-    start_date = st.slider("Select start date", min_date, max_date, min_date, format="X")
-    end_date = st.slider("Select end date", min_date, max_date, max_date, format="X")
-
-    # Convert the Unix timestamps back to datetime objects
-    start_date = pd.to_datetime(start_date, unit='s')
-    end_date = pd.to_datetime(end_date, unit='s')
+    start_date = st.slider("Select start date", min_date, max_date, min_date)
+    end_date = st.slider("Select end date", min_date, max_date, max_date)
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
+
+    # Create the Streamlit app
+    st.title("Gpp Data Visualization")
 
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
     chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
