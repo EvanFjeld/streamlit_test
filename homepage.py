@@ -55,17 +55,17 @@ def single_location_analysis(file, location):
     st.write("Ending date:", end_date)
 
     # Filter the DataFrame based on the selected date range
-    filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
+    filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
 
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    # chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
+    chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
     # Plot the graph
-    plt.plot(df["date"], df["Gpp"])
-    plt.xlim([start_date, end_date])
-    plt.show()
+    # plt.plot(df["date"], df["Gpp"])
+    # plt.xlim([start_date, end_date])
+    # plt.show()
 
     csv = convert_df(df)
 
