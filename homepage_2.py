@@ -8,11 +8,6 @@ def intro():
 def single_location_nav(location_name):
     single_location_to_funcs[location_name][1](single_location_to_funcs[location_name][0], location_name)
 
-def single_location_page():
-    st.markdown('# Analysis of a Single Location')
-    st.write("Great!")
-    single_location_nav(single_location_to_funcs)
-
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
     st.write("What to know when you compare locations.")
