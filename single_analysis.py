@@ -33,10 +33,6 @@ def single_location_analysis(file, location):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
     
-    # Progress bar and status text in the sidebar
-    progress_bar = st.sidebar.progress(0)
-    status_text = st.sidebar.empty()
-    
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
     chart = st.line_chart(data=df, x='date', y='Gpp')
 
