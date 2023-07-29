@@ -7,8 +7,8 @@ def intro():
     st.markdown("Welcome to the Boreal Forest Carbon Calculator")
 
 def single_analysis_page():
-    # Call the single_analysis.py script using subprocess
-    single_analysis.single_analysis_page()
+    st.markdown('# This page is meant to compare multiple locations')
+    st.write("What to know when you compare locations.")
 
 def location_comparison_page():
     st.markdown('# This page is meant to compare multiple locations')
