@@ -4,9 +4,11 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 
-def none_selected(file):
+def none_selected(options_df):
     st.write("Don't know the location name?")
     st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
+
+    #options_df = options_df[["Lat","Long","filename"]]
 
     col1, col2 = st.columns(2)
     with col1:
@@ -14,7 +16,12 @@ def none_selected(file):
     with col2:
         long = st.selectbox("Select Longitude", page_names_to_funcs.keys())
 
-    return lat, long
+    file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
+    location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
+
+    single_location_analysis(file_name, location_name)
+    
+    return file_name
 
 def single_location_analysis(file, location):
     st.markdown(f'# {location_name}')
@@ -134,4 +141,4 @@ location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
 single_location_analysis(options[location_name][0], location_name)
 
 if location_name == "-":
-    lat, long = none_selected(file)
+    lat, long = none_selected(options_df)
