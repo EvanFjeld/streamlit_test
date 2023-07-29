@@ -15,7 +15,7 @@ def location_comparison_page():
 def single_location_page():
     st.markdown('# Analysis of a Single Location')
     st.write("Great!")
-    single_location_to_funcs = single_location_names()
+    single_location_to_funcs = single_location_names()  # Define single_location_to_funcs here
     location_name = st.selectbox("Choose a location", list(single_location_to_funcs.keys()))
     single_location_nav(location_name)
 
