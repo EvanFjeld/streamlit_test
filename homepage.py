@@ -54,8 +54,6 @@ def single_location_analysis(file, location):
         mime='text/csv',
     )
 
-
-@st.cache
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
