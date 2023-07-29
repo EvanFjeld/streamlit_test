@@ -144,6 +144,6 @@ with loc_col1:
   location_1_name = st.selectbox("Choose the first location", location1_options)
 with loc_col2:
   location2_options = [x for x in location1_options if x != location_1_name]
-  location_2_name = st.selectbox("Choose the second location", Location2_options)
+  location_2_name = st.selectbox("Choose the second location", location2_options)
 
 multiple_location_analysis(options[location_1_name], options[location_2_name], location_1_name, location_2_name)
