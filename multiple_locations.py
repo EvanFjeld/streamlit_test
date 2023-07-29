@@ -98,7 +98,8 @@ def multiple_location_analysis(file1, file2, location1, location2):
     ax.set_title('Gpp Data Visualization')
 
     ax.legend()
-    plt.show()
+    # Display the plot using st.pyplot()
+    st.pyplot(fig)
 
     csv = convert_df(df)
 
