@@ -95,18 +95,22 @@ def single_lat_long():
     
     lat_options = df.Lat.unique()
     
-    # Create two columns for the layout
-    col1, col2 = st.columns(2)
+    # Check if the selected latitude is in the session state, if not, initialize it to the first option
+    if "selected_lat" not in st.session_state:
+        st.session_state.selected_lat = lat_options[0]
     
-    # Display the latitude selectbox in the first column
-    with col1:
-        lat = st.selectbox("Choose a Latitude", lat_options)
+    # Display the latitude selectbox
+    lat = st.selectbox("Choose a Latitude", lat_options, index=lat_options.tolist().index(st.session_state.selected_lat))
 
+    # Update the selected latitude in the session state
+    st.session_state.selected_lat = lat
+
+    # Filter the DataFrame to get the corresponding longitude options based on the selected latitude
     filtered_df = df.loc[df['Lat'] == lat]
     long_options = filtered_df.Long.unique()
-    # Display the longitude selectbox in the second column
-    with col2:
-        long = st.selectbox("Choose a Longitude", long_options)
+
+    # Display the longitude selectbox
+    long = st.selectbox("Choose a Longitude", long_options)
 
 #@st.cache_data
 def convert_df(df):
