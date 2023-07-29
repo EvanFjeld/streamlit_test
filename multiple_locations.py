@@ -94,10 +94,6 @@ def multiple_location_analysis(file1, file2, location1, location2):
     ## Plot the second line for 'Gpp_loc2'
     ax.plot(filtered_df['date'], filtered_df['Gpp_loc2'], label='Gpp_loc2', color='green')
 
-    # Replace st.pyplot(two_subplot_fig) with this code below! 
-    fig_html = mpld3.fig_to_html(two_subplot_fig)
-    components.html(fig_html, height=600)
-
     # CODE TO ADD
     # Define some CSS to control our custom labels
     css = """
@@ -133,7 +129,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
             # Create the tooltip with the labels (x and y coords) and attach it to each line with the css specified
             tooltip = plugins.PointHTMLTooltip(line, labels, css=css)
             # Since this is a separate plugin, you have to connect it
-            plugins.connect(two_subplot_fig, tooltip)
+            plugins.connect(fig, tooltip)
     
     # Set labels and title
     ax.set_xlabel('Date')
@@ -142,7 +138,8 @@ def multiple_location_analysis(file1, file2, location1, location2):
 
     ax.legend()
     # Display the plot using st.pyplot()
-    st.pyplot(fig)
+    fig_html = mpld3.fig_to_html(fig)
+    components.html(fig_html, height=600)
 
     csv = convert_df(df)
 
