@@ -163,8 +163,6 @@ st.markdown(
 """
 )
 
-#st.sidebar.button("About")
-
 # Columns for 2 locations to compare
 options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 locations_df = options_df[['Location', 'filename']].set_index('Location')
