@@ -122,9 +122,8 @@ def convert_df(df):
 #page_names_to_funcs = pag_names_functions("Locations")
 
 options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
-locations_df = options_df[['Location', 'filename']].set_index('Location')
 
-options = ["-"] + list(locations_df.Location.unique())
+options = ["-"] + list(options_df.Location.unique())
 
 st.write("# Boreal Forecast GPP Forecast")
 
@@ -139,7 +138,7 @@ st.markdown(
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", options.keys())
-location_filename = locations_df.loc[(locations_df["Location"] == location_name)].values[0]
+location_filename = locations_df.loc[(options_df["Location"] == location_name), "filename"].values[0]
 #page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 single_location_analysis(location_filename, location_name)
 
