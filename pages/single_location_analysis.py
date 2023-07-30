@@ -37,7 +37,7 @@ def single_location_analysis(file, location):
     st.markdown(f'# {location}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/" + file + ".csv"
+    file_name = "/streamlit_data/data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     # Convert the 'date' column to datetime type
@@ -105,7 +105,7 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
+options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
 options = ["-"] + list(options_df.Location.unique())
 
