@@ -6,7 +6,7 @@ st.title("Request a New Location")
 current = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
 # Request location name
-location_name = st.text_input("Enter Location Name:")
+location_name_input = st.text_input("Enter Location Name:")
 
 # Request latitude value between 1 and 100
 # lat = st.slider("Enter Latitude (between 1 and 100):", min_value=1.0, max_value=100.0, value=50.0, step=0.1)
@@ -20,8 +20,11 @@ if lat in current.Lat.values and long in current.Long.values:
     location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"]
     if location_name.size != 0:
         st.write(f"This location is already an option. It is called {location_name}")
+    elif location_name_input == "":
+        st.write(f"This location exists but does not have a name, enter a location name if you would like to save it as a location.")
     else:
-        st.write(f"This location exists but does not have a name, would you like to name this location?")
+        st.write(f"Do you want to save a location with latitude {lat} and longitue {long} as {location_name_input}.")
+        st.button("Save")
 elif location_name in current.Location.values:
     st.write(f"{location_name} name is already in use. Please select a different name.")
 elif location_name != "":
