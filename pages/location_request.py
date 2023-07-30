@@ -3,7 +3,7 @@ import pandas as pd
 
 st.title("Request a New Location")
 
-current = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
+current = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
 # Request location name
 location_name = st.text_input("Enter Location Name:")
