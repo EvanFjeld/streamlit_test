@@ -11,6 +11,9 @@ def none_selected(options_df):
     #options_df = options_df[["Lat","Long","filename"]]
     lat = "-"
     long = "-"
+
+    options_df = options_df[~options_df.isna().any(axis=1)]
+    
     if long == "-": lat_options = [lat] + list(options_df.Lat.unique())
     else: lat_options = [lat] + list(options_df[(options_df.Long == long)].Lat.unique())
     
@@ -107,8 +110,9 @@ def convert_df(df):
 
 options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
-options = ["-"] + list(options_df.Location.unique())
-options = [x for x in options if not pd.isna(x)]
+location_options = options_df[~options_df.isna().any(axis=1)]
+
+options = ["-"] + list(location_options.Location.unique())
 
 st.write("# Boreal Forecast GPP Forecast")
 
