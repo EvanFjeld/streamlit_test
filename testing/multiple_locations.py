@@ -32,9 +32,9 @@ def multiple_location_analysis(file1, file2, location1, location2):
     st.markdown(f'# {location1} & {location2}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    loc_1_file_name = "/streamlit_data/" + file1 + ".csv"
+    loc_1_file_name = "/streamlit_data/data/" + file1 + ".csv"
     loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
-    loc_2_file_name = "/streamlit_data/" + file2 + ".csv"
+    loc_2_file_name = "/streamlit_data/data/" + file2 + ".csv"
     loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
 
     loc1_df = loc1_df[['date', 'Gpp']]
@@ -84,63 +84,48 @@ def multiple_location_analysis(file1, file2, location1, location2):
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
-
-    fig, ax = plt.subplots()
-
-    # Plot the first line for 'Gpp_loc1'
-    ax.plot(filtered_df['date'], filtered_df['Gpp_loc1'], label='Gpp_loc1', color='blue')
-
-    ## Plot the second line for 'Gpp_loc2'
-    ax.plot(filtered_df['date'], filtered_df['Gpp_loc2'], label='Gpp_loc2', color='green')
-
-    # CODE TO ADD
-    # Define some CSS to control our custom labels
-    css = """
-    table
-    {
-      border-collapse: collapse;
-    }
-    th
-    {
-      color: #ffffff;
-      background-color: #000000;
-    }
-    td
-    {
-      background-color: #cccccc;
-    }
-    table, th, td
-    {
-      font-family:Arial, Helvetica, sans-serif;
-      border: 1px solid black;
-      text-align: right;
-    }
-    """
-    for axes in fig.axes:
-        for line in axes.get_lines():
-            # get the x and y coords
-            xy_data = line.get_xydata()
-            labels = []
-            for x, y in xy_data:
-                # Create a label for each point with the x and y coords
-                html_label = f'<table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> </thead> <tbody> <tr> <th>x</th> <td>{x}</td> </tr> <tr> <th>y</th> <td>{y}</td> </tr> </tbody> </table>'
-                labels.append(html_label)
-            # Create the tooltip with the labels (x and y coords) and attach it to each line with the css specified
-            tooltip = plugins.PointHTMLTooltip(line, labels, css=css)
-            # Since this is a separate plugin, you have to connect it
-            plugins.connect(fig, tooltip)
+    filtered_df['date'] = pd.to_datetime(filtered_df['date'])
     
-    # Set labels and title
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Gpp')
-    ax.set_title('Gpp Data Visualization')
-
-    ax.legend()
-    # Display the plot using st.pyplot()
-    fig_html = mpld3.fig_to_html(fig)
-    components.html(fig_html, height=600)
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.set_facecolor('black')  # Set black background
+    ax.set_title('Gpp Forecasting', color='white', fontsize=16)  # Set white title
+    
+    # Plot the lines for 'Gpp_loc1' and 'Gpp_loc2' based on 'isforecasted' column
+    for is_forecasted, group in filtered_df.groupby('isforcasted'):
+        linestyle = '--' if is_forecasted == 1 else '-'
+        label = "Forecast" if is_forecasted == 1 else "Actual"
+        ax.plot(group['date'], group['Gpp_loc1'], linestyle=linestyle, label=f'{label} - Gpp_loc1')
+        ax.plot(group['date'], group['Gpp_loc2'], linestyle=linestyle, label=f'{label} - Gpp_loc2')
+    
+    ax.legend(loc='best', facecolor='black', edgecolor='white', labelcolor='white')  # Set legend properties
+    
+    # Set the color of tick labels and title to white
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.title.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    
+    # Set the color of the axis spines (lines representing the axes) to white
+    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('white')
+    
+    # Set the x-axis color to black
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.title.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    
+    # Set the color of the axis spines (lines representing the axes) to white
+    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('white')
+        
+    fig.patch.set_facecolor('black')
+    
+    # Display the plot
+    plt.show()
 
     csv = convert_df(df)
 
@@ -155,27 +140,6 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
-def pag_names_functions(file):
-    import pandas as pd
-    
-    AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/" + file + ".csv"
-    saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
-
-    saved_options['AnalysisType'] = multiple_location_analysis
-    saved_options= saved_options.set_index('Location')
-    
-    options = {"-": ["", none_selected]}
-    
-    for index, row in saved_options.iterrows():
-        row_as_list = row.tolist()
-        options[index] =  row_as_list
-    
-    return options
-
-
-page_names_to_funcs = pag_names_functions("Locations")
-
 st.write("# Boreal Forecast GPP Forecast Comparison")
 
 st.markdown(
@@ -184,31 +148,27 @@ st.markdown(
 """
 )
 
-#st.sidebar.button("About")
-
 # Columns for 2 locations to compare
-options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
-locations_df = options_df[['Location', 'filename']].set_index('Location')
+options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
+location_options = options_df.dropna(subset=['Location'])
 
-options = {"-": [""]}
+options = ["-"] + list(location_options.Location.unique())
 
-for index, row in locations_df.iterrows():
-    row_as_list = row.tolist()
-    options[index] =  row_as_list
-
-location1_options = options.keys()
+location1_options = options
 location_1_name = "-"
-location2_options = options.keys()
+loc_1_filename = ""
+location2_options = options
 location_2_name = "-"
+loc_2_filename = ""
 
 loc_col1, loc_col2 = st.columns(2)
 with loc_col1:
     if location_2_name != "-": location1_options = [x for x in location2_options if x != location_2_name]
     location_1_name = st.selectbox("Choose the first location", location1_options)
+    if location_1_name != "-": loc_1_filename = options_df.loc[(options_df["Location"] == location_1_name), "filename"].values[0]
 with loc_col2:
-  if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
-  location_2_name = st.selectbox("Choose the second location", location2_options)
+    if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
+    location_2_name = st.selectbox("Choose the second location", location2_options)
+    if location_1_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_1_name), "filename"].values[0]
 
-#st.write(f'{location_1_name} file {options[location_1_name][0]}')
-
-multiple_location_analysis(options[location_1_name][0], options[location_2_name][0], location_1_name, location_2_name)
+multiple_location_analysis(loc_1_filename, loc_2_filename, location_1_name, location_2_name)
