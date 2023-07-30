@@ -25,7 +25,7 @@ st.write(f"Longitude: {long}")
 if lat in current.Lat.values and long in current.Long.values:
     location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"].values[0]
     st.write(f"This location is already an option. It is called {location_name}")
-else if location_name in current.Location.values:
+elif location_name in current.Location.values:
     st.write(f"{location_name} name is already in use. Please select a different name.")
 else:
     st.button("Request New Location")
