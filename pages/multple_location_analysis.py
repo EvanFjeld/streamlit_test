@@ -84,9 +84,6 @@ def multiple_location_analysis(file1, file2, location1, location2):
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
-
     fig, ax = plt.subplots()
 
     # Plot the first line for 'Gpp_loc1'
@@ -135,7 +132,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
     # Set labels and title
     ax.set_xlabel('Date')
     ax.set_ylabel('Gpp')
-    ax.set_title('Gpp Data Visualization')
+    ax.set_title('Gpp Compariosn')
 
     ax.legend()
     # Display the plot using st.pyplot()
