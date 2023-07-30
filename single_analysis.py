@@ -148,4 +148,4 @@ if location_name != "-": location_filename = options_df.loc[(options_df["Locatio
 single_location_analysis(location_filename, location_name)
 
 if location_name == "-":
-    lat, long = none_selected(options_df)
+    none_selected(options_df)
