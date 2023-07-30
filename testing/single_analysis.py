@@ -34,8 +34,6 @@ def none_selected(options_df):
 def single_location_analysis(file, location):
     if location == "-": return ""
     
-    st.markdown(f'# {location}')
-    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
@@ -50,13 +48,24 @@ def single_location_analysis(file, location):
     start_year = min_date.year
     end_month = max_date.strftime("%B")
     end_year = max_date.year
+
+    gpp = df.Gpp.sum()
+    forecasted_df = df[df.isforecasted == True]
+    forecasted_gpp = forecasted_df.Gpp.sum()
+    actual_df = df[df.isforecasted == False]
+    actual_gpp = actual_df.Gpp.sum()
+
+    forecast_startdate = forecasted_df.date.min()
+    forcast_month = max_date.strftime("%B")
+    forecast_year = max_date.year
     
-    st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
+    st.markdown(f'# {location}')
+    #st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
+    st.markdown(f'We project that {location} will have a GPP of {gpp} from {start_month}, {start_year} to {end_month}, {end_year}.')
+    st.markdown(f'Of that, {actual_gpp} was measured between {start_month}, {start_year} and {forcast_month}, {forecast_year}. From that point on, we forecasted that {location} will capture an additional {forecasted_gpp} until {end_month}, {end_year}')
+    
     # st.write("Starting date:", min_date)
     # st.write("Max date:", max_date)
-    
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
 
     # Create the sliders
     col1, col2 = st.columns(2)
@@ -80,9 +89,6 @@ def single_location_analysis(file, location):
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
-
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
 
     # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
     chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
