@@ -28,12 +28,13 @@ def none_selected(options_df):
     if lat != "-" and long != "-": 
         file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
         location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
+        st.write(location_name)
         single_location_analysis(file_name, location_name)
 
 def single_location_analysis(file, location):
     if location == "-": return ""
     
-    st.markdown(f'# {location_name}')
+    st.markdown(f'# {location}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/" + file + ".csv"
@@ -50,7 +51,7 @@ def single_location_analysis(file, location):
     end_month = max_date.strftime("%B")
     end_year = max_date.year
     
-    st.write(f'Here is the analysis and forecast for {location_name}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
+    st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
     # st.write("Starting date:", min_date)
     # st.write("Max date:", max_date)
     
