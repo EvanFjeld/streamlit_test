@@ -19,7 +19,7 @@ long = st.number_input("Longitude (between 1 and 100)", min_value=-92.5, max_val
 if lat in current.Lat.values and long in current.Long.values:
     location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"].loc[0]
     if location_name.size != 0:
-        st.write(f"This location is already an option. It is called {location_name.loc[0]}")
+        st.write(f"This location is already an option. It is called {location_name}")
     else:
         st.write(f"This location exists but does not have a name, would you like to name this location?")
 elif location_name in current.Location.values:
