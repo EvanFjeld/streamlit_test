@@ -167,25 +167,21 @@ st.markdown(
 options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 location_options = options_df.dropna(subset=['Location'])
 
-options = {"-": [""]}
+options = ["-"] + list(location_options.Location.unique())
 
-for index, row in location_options.iterrows():
-    row_as_list = row.tolist()
-    options[index] =  row_as_list
-
-location1_options = options.keys()
+location1_options = options
 location_1_name = "-"
-location2_options = options.keys()
+location2_options = options
 location_2_name = "-"
 
 loc_col1, loc_col2 = st.columns(2)
 with loc_col1:
     if location_2_name != "-": location1_options = [x for x in location2_options if x != location_2_name]
     location_1_name = st.selectbox("Choose the first location", location1_options)
+    if location_1_name != "-": loc_1_filename = options_df.loc[(options_df["Location"] == location_1_name), "filename"].values[0]
 with loc_col2:
-  if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
-  location_2_name = st.selectbox("Choose the second location", location2_options)
+    if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
+    location_2_name = st.selectbox("Choose the second location", location2_options)
+    if location_1_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_1_name), "filename"].values[0]
 
-#st.write(f'{location_1_name} file {options[location_1_name][0]}')
-
-multiple_location_analysis(options[location_1_name][0], options[location_2_name][0], location_1_name, location_2_name)
+multiple_location_analysis(loc_1_filenamek, loc_2_filename, location_1_name, location_2_name)
