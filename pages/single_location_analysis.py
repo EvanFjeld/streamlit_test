@@ -94,7 +94,7 @@ def single_location_analysis(file, location):
         label = "Forecast" if is_forecasted == 1 else "Actual"
         ax.plot(group['date'], group['Gpp'], linestyle=linestyle, label=label)
     
-    ax.legend(loc='best', facecolor='black', edgecolor='white')  # Set legend properties
+    ax.legend(loc='best', facecolor='black', edgecolor='white', labelcolor='white')  # Set legend properties
     
     # Set the color of tick labels to white
     ax.xaxis.label.set_color('white')
