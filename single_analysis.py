@@ -12,7 +12,7 @@ def none_selected(options_df):
     lat = "-"
     lat_options = [lat] + list(options_df.Lat.unique())
     long = "-"
-    long_options = [long] + (options_df.Long.unique())
+    long_options = [long] + list(options_df.Long.unique())
 
     col1, col2 = st.columns(2)
     with col1:
