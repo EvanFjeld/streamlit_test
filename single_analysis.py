@@ -11,8 +11,11 @@ def none_selected(options_df):
     #options_df = options_df[["Lat","Long","filename"]]
     lat = "-"
     long = "-"
-    lat_options = [lat] + list(options_df[(options_df.Lat == long)].Long.unique())
-    long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
+    if long == "-": lat_options = [lat] + list(options_df.Lat.unique())
+    else: lat_options = [lat] + list(options_df[(options_df.Long == long)].Lat.unique())
+    
+    if lat == "-": long_options = [long] + list(options_df.Long.unique())
+    else: long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
 
     col1, col2 = st.columns(2)
     with col1:
