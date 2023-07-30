@@ -32,9 +32,9 @@ def multiple_location_analysis(file1, file2, location1, location2):
     st.markdown(f'# {location1} & {location2}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    loc_1_file_name = "/streamlit_data/" + file1 + ".csv"
+    loc_1_file_name = "/streamlit_data/data/" + file1 + ".csv"
     loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
-    loc_2_file_name = "/streamlit_data/" + file2 + ".csv"
+    loc_2_file_name = "/streamlit_data/data/" + file2 + ".csv"
     loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
 
     loc1_df = loc1_df[['date', 'Gpp']]
