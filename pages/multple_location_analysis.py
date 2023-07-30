@@ -171,8 +171,10 @@ options = ["-"] + list(location_options.Location.unique())
 
 location1_options = options
 location_1_name = "-"
+loc_1_filename = ""
 location2_options = options
 location_2_name = "-"
+loc_2_filename = ""
 
 loc_col1, loc_col2 = st.columns(2)
 with loc_col1:
