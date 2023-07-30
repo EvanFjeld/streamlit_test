@@ -61,7 +61,7 @@ def single_location_analysis(file, location):
     
     st.markdown(f'# {location}')
     #st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    st.markdown(f'We project that {location} will have a GPP of {gpp} from {start_month}, {start_year} to {end_month}, {end_year}.')
+    st.markdown(f'We project that {location} will have a GPP of {round(gpp,0)} from {start_month}, {start_year} to {end_month}, {end_year}.')
     st.markdown(f'Of that, {actual_gpp} was measured between {start_month}, {start_year} and {forcast_month}, {forecast_year}. From that point on, we forecasted that {location} will capture an additional {forecasted_gpp} until {end_month}, {end_year}')
     
     # st.write("Starting date:", min_date)
