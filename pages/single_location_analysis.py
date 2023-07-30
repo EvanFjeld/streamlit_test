@@ -12,7 +12,7 @@ def none_selected(options_df):
     lat = "-"
     long = "-"
 
-    options_df = options_df[~options_df.isna().any(axis=1)]
+    options_df = options_df.dropna(subset=['Lat','Long'])
     
     if long == "-": lat_options = [lat] + list(options_df.Lat.unique())
     else: lat_options = [lat] + list(options_df[(options_df.Long == long)].Lat.unique())
@@ -110,7 +110,7 @@ def convert_df(df):
 
 options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
-location_options = options_df[~options_df.isna().any(axis=1)]
+location_options = options_df.dropna(subset=['Location'])
 
 options = ["-"] + list(location_options.Location.unique())
 
