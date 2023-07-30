@@ -22,12 +22,14 @@ def none_selected(options_df):
         if lat != "-": long_options = [x for x in lat_options if x != lat]
         long = st.selectbox("Select Longitude", long_options)
 
-    file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
-    location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
-
-    single_location_analysis(file_name, location_name)
     
-    return file_name
+
+    if lat != "-" and lat != "-": 
+        file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
+        location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
+        latsingle_location_analysis(file_name, location_name)
+    
+    return ""
 
 def single_location_analysis(file, location):
     if location == "-": return ""
