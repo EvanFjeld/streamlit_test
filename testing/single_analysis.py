@@ -56,8 +56,6 @@ def single_location_analysis(file, location):
     end_year = max_date.year
     
     st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    # st.write("Starting date:", min_date)
-    # st.write("Max date:", max_date)
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
@@ -85,18 +83,16 @@ def single_location_analysis(file, location):
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
-
     # Create the plot
     fig, ax = plt.subplots(figsize=(8, 6))
     ax.set_facecolor('black')  # Set black background
     ax.set_title('Gpp Forecasting', color='white', fontsize=16)  # Set white title
     
     # Plot the lines based on 'isforecasted' column
-    for is_forecasted, group in filtered_df.groupby('isforecasted'):
-        linestyle = '-' if is_forecasted else '--'
-        ax.plot(group['date'], group['Gpp'], linestyle=linestyle, label=f'Is Forecasted: {is_forecasted}')
+    for is_forecasted, group in df.groupby('isforecasted'):
+        linestyle = '--' if is_forecasted == 1 else '-'
+        label = "Forecast" if is_forecasted == 1 else "Actual"
+        ax.plot(group['date'], group['Gpp'], linestyle=linestyle, label=label)
     
     ax.legend(loc='best', facecolor='black', edgecolor='white')  # Set legend properties
     
@@ -105,6 +101,9 @@ def single_location_analysis(file, location):
     ax.yaxis.label.set_color('white')
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
+
+    # sex axis background color to black
+    fig.patch.set_facecolor('black')
     
     # Plot!
     st.pyplot(fig)
