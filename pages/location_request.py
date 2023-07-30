@@ -16,12 +16,6 @@ location_name = st.text_input("Enter Location Name:")
 lat = st.number_input("Latitude (between 1 and 100)", min_value=1.0, max_value=100.0, value=1.0)
 long = st.number_input("Longitude (between 1 and 100)", min_value=1.0, max_value=100.0, value=1.0)
 
-# Display the submitted information
-st.write("You entered the following information:")
-st.write(f"Location Name: {location_name}")
-st.write(f"Latitude: {lat}")
-st.write(f"Longitude: {long}")
-
 if lat in current.Lat.values and long in current.Long.values:
     location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"].values[0]
     st.write(f"This location is already an option. It is called {location_name}")
@@ -30,4 +24,5 @@ elif location_name in current.Location.values:
 elif location_name != "":
     st.button("Request New Location")
 else: 
+    st.write(f"You are requesting a new location called {location_name} with a latitude of {lat} and a longitude of {long}")
     st.write("Please enter a name, latitude, and longitude.")
