@@ -25,7 +25,7 @@ def none_selected(options_df):
         if lat != "-": long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
         long = st.selectbox("Select Longitude", long_options)
 
-    if lat != "-" and lat != "-": 
+    if lat != "-" and long != "-": 
         file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
         location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
         single_location_analysis(file_name, location_name)
@@ -103,26 +103,6 @@ def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
-# def pag_names_functions(file):
-#     import pandas as pd
-    
-#     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-#     file_name = "/streamlit_data/" + file + ".csv"
-#     saved_options = pd.read_csv(AWS_BUCKET_URL + file_name)
-
-#     saved_options['AnalysisType'] = single_location_analysis
-#     saved_options= saved_options.set_index('Location')
-    
-#     options = {"-": ["", none_selected]}
-    
-#     for index, row in saved_options.iterrows():
-#         row_as_list = row.tolist()
-#         options[index] =  row_as_list
-    
-#     return options
-
-
-#page_names_to_funcs = pag_names_functions("Locations")
 
 options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
 
@@ -143,7 +123,7 @@ st.markdown(
 location_name = st.selectbox("Choose a location", options)
 location_filename = "-"
 if location_name != "-": location_filename = options_df.loc[(options_df["Location"] == location_name), "filename"].values[0]
-#page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
+
 single_location_analysis(location_filename, location_name)
 
 if location_name == "-":
