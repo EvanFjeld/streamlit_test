@@ -92,7 +92,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
     ax.set_title('Gpp Forecasting', color='white', fontsize=16)  # Set white title
     
     # Plot the lines for 'Gpp_loc1' and 'Gpp_loc2' based on 'isforecasted' column
-    for is_forecasted, group in filtered_df.groupby('isforcasted'):
+    for is_forecasted, group in filtered_df.groupby('isforecasted'):
         linestyle = '--' if is_forecasted == 1 else '-'
         label = "Forecast" if is_forecasted == 1 else "Actual"
         ax.plot(group['date'], group['Gpp_loc1'], linestyle=linestyle, label=f'{label} - Gpp_loc1')
