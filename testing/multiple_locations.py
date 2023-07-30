@@ -37,7 +37,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
     loc_2_file_name = "/streamlit_data/data/" + file2 + ".csv"
     loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
 
-    loc1_df = loc1_df[['date', 'Gpp']]
+    loc1_df = loc1_df[['date', 'Gpp', 'isforecasted']]
     loc2_df = loc2_df[['date', 'Gpp']]
     
     # Convert the 'date' column to datetime type
