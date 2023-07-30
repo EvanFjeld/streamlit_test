@@ -108,7 +108,7 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
+options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
 location_options = options_df[~options_df.isna().any(axis=1)]
 
