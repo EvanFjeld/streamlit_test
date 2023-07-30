@@ -19,10 +19,10 @@ def none_selected(options_df):
 
     col1, col2 = st.columns(2)
     with col1:
-        lat_options = [lat] + list(options_df[(options_df.Lat == long)].Long.unique())
+        if long != "-": lat_options = [lat] + list(options_df[(options_df.Lat == long)].Long.unique())
         lat = st.selectbox("Select Latitude", lat_options)
     with col2:
-        long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
+        if lat != "-": long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
         long = st.selectbox("Select Longitude", long_options)
 
     if lat != "-" and lat != "-": 
