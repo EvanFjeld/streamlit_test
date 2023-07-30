@@ -124,7 +124,7 @@ def convert_df(df):
 options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
 locations_df = options_df[['Location', 'filename']].set_index('Location')
 
-options = ["-"] + list(location_df.Location.unique())
+options = ["-"] + list(locations_df.Location.unique())
 
 st.write("# Boreal Forecast GPP Forecast")
 
