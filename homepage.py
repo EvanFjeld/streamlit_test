@@ -15,6 +15,7 @@ show_pages(
         Page("homepage.py", "Homepage"),
         Page("pages/single_location_analysis.py", "Single Location Analysis"),
         Page("pages/multple_location_analysis.py", "Compare Multiple Locations"),
+        Page("pages/location_request.py", "Request a New Location"),
         Page("pages/about_page.py", "About"),
     ]
 )
