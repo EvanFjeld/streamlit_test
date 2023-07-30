@@ -10,16 +10,16 @@ def none_selected(options_df):
 
     #options_df = options_df[["Lat","Long","filename"]]
     lat = "-"
-    lat_options = [lat] + list(options_df.Lat.unique())
     long = "-"
-    long_options = [long] + list(options_df.Long.unique())
+    lat_options = [lat] + list(options[(options.Lat == Long)].Long.unique())
+    long_options = [long] + list(options[(options.Lat == lat)].Long.unique())
 
     col1, col2 = st.columns(2)
     with col1:
-        if long != "-": lat_options = [x for x in long_options if x != long]
+        lat_options = [lat] + list(options[(options.Lat == Long)].Long.unique())
         lat = st.selectbox("Select Latitude", lat_options)
     with col2:
-        if lat != "-": long_options = [x for x in lat_options if x != lat]
+        long_options = [long] + list(options[(options.Lat == lat)].Long.unique())
         long = st.selectbox("Select Longitude", long_options)
 
     
