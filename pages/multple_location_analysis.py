@@ -165,11 +165,11 @@ st.markdown(
 
 # Columns for 2 locations to compare
 options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
-locations_df = options_df[['Location', 'filename']].set_index('Location')
+location_options = options_df.dropna(subset=['Location'])
 
 options = {"-": [""]}
 
-for index, row in locations_df.iterrows():
+for index, row in location_options.iterrows():
     row_as_list = row.tolist()
     options[index] =  row_as_list
 
