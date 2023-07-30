@@ -13,8 +13,8 @@ location_name = st.text_input("Enter Location Name:")
 # long = st.slider("Enter Longitude (between 1 and 100):", min_value=1.0, max_value=100.0, value=50.0, step=0.1)
 
 #text input
-lat = st.number_input("Latitude (between 1 and 100)", min_value=1, max_value=100, value=1)
-long = st.number_input("Longitude (between 1 and 100)", min_value=1, max_value=100, value=1)
+lat = st.number_input("Latitude (between 1 and 100)", min_value=1, max_value=100, value=1.0)
+long = st.number_input("Longitude (between 1 and 100)", min_value=1, max_value=100, value=1.0)
 
 # Display the submitted information
 st.write("You entered the following information:")
