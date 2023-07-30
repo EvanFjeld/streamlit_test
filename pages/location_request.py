@@ -16,6 +16,8 @@ location_name_input = st.text_input("Enter Location Name:")
 lat = st.number_input("Latitude (between 1 and 100)", min_value=49.8574, max_value=50.954, value=49.8574)
 long = st.number_input("Longitude (between 1 and 100)", min_value=-92.5, max_value=-87.85, value=-92.5)
 
+location_name = ''
+
 if lat in current.Lat.values and long in current.Long.values:
     location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"]
     if location_name.size != 0:
