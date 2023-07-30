@@ -2,6 +2,7 @@ import streamlit as st
 import time
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 def none_selected(options_df):
@@ -55,8 +56,6 @@ def single_location_analysis(file, location):
     end_year = max_date.year
     
     st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    # st.write("Starting date:", min_date)
-    # st.write("Max date:", max_date)
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
@@ -84,15 +83,30 @@ def single_location_analysis(file, location):
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.set_facecolor('black')  # Set black background
+    ax.set_title('Gpp Forecasting', color='white', fontsize=16)  # Set white title
+    
+    # Plot the lines based on 'isforecasted' column
+    for is_forecasted, group in df.groupby('isforecasted'):
+        linestyle = '--' if is_forecasted == 1 else '-'
+        label = "Forecast" if is_forecasted == 1 else "Actual"
+        ax.plot(group['date'], group['Gpp'], linestyle=linestyle, label=label)
+    
+    ax.legend(loc='best', facecolor='black', edgecolor='white')  # Set legend properties
+    
+    # Set the color of tick labels to white
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
 
-    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
-    # Plot the graph
-    # plt.plot(df["date"], df["Gpp"])
-    # plt.xlim([start_date, end_date])
-    # plt.show()
+    # sex axis background color to black
+    fig.patch.set_facecolor('black')
+    
+    # Plot!
+    st.pyplot(fig)
 
     csv = convert_df(df)
 
