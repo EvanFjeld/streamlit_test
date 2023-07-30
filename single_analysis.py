@@ -28,7 +28,7 @@ def none_selected(options_df):
     if lat != "-" and lat != "-": 
         file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
         location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
-        latsingle_location_analysis(file_name, location_name)
+        single_location_analysis(file_name, location_name)
 
 def single_location_analysis(file, location):
     if location == "-": return ""
