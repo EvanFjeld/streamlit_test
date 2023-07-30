@@ -13,8 +13,8 @@ location_name = st.text_input("Enter Location Name:")
 # long = st.slider("Enter Longitude (between 1 and 100):", min_value=1.0, max_value=100.0, value=50.0, step=0.1)
 
 #text input
-lat = st.number_input("Latitude (between 1 and 100)", min_value=1.0, max_value=100.0, value=1.0)
-long = st.number_input("Longitude (between 1 and 100)", min_value=1.0, max_value=100.0, value=1.0)
+lat = st.number_input("Latitude (between 1 and 100)", min_value=49.8574, max_value=50.954, value=49.8574)
+long = st.number_input("Longitude (between 1 and 100)", min_value=-92.5, max_value=-87.85, value=-92.5)
 
 if lat in current.Lat.values and long in current.Long.values:
     location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"].values[0]
