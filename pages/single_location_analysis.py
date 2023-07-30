@@ -89,7 +89,7 @@ def single_location_analysis(file, location):
     ax.set_title('Gpp Forecasting', color='white', fontsize=16)  # Set white title
     
     # Plot the lines based on 'isforecasted' column
-    for is_forecasted, group in df.groupby('isforecasted'):
+    for is_forecasted, group in filtered_df.groupby('isforecasted'):
         linestyle = '--' if is_forecasted == 1 else '-'
         label = "Forecast" if is_forecasted == 1 else "Actual"
         ax.plot(group['date'], group['Gpp'], linestyle=linestyle, label=label)
