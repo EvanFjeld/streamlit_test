@@ -106,8 +106,8 @@ def single_location_analysis(file, location):
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
     
-    # Display the plot
-    plt.show()
+    # Plot!
+    st.plotly_chart(fig, use_container_width=True)
 
     csv = convert_df(df)
 
