@@ -93,8 +93,8 @@ def multiple_location_analysis(file1, file2, location1, location2):
     for is_forecasted, group in filtered_df.groupby('isforecasted'):
         linestyle = '--' if is_forecasted == 1 else '-'
         label = "Forecast" if is_forecasted == 1 else "Actual"
-        ax.plot(group['date'], group['Gpp_loc1'], linestyle=linestyle, label=f'{label} - Gpp_loc1')
-        ax.plot(group['date'], group['Gpp_loc2'], linestyle=linestyle, label=f'{label} - Gpp_loc2')
+        ax.plot(group['date'], group['Gpp_loc1'], linestyle=linestyle, label=f'{label} - {location1}')
+        ax.plot(group['date'], group['Gpp_loc2'], linestyle=linestyle, label=f'{label} - {location2}')
     
     ax.legend(loc='best', facecolor='black', edgecolor='white', labelcolor='white')  # Set legend properties
     
