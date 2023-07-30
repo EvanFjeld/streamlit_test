@@ -9,10 +9,10 @@ def none_selected(options_df):
     st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
 
     #options_df = options_df[["Lat","Long","filename"]]
-    lat_options = list(options_df.Lat.unique())
-    long_options = (options_df.Long.unique())
     lat = "-"
+    lat_options = [lat] + list(options_df.Lat.unique())
     long = "-"
+    long_options = [long] + (options_df.Long.unique())
 
     col1, col2 = st.columns(2)
     with col1:
@@ -124,11 +124,7 @@ def convert_df(df):
 options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
 locations_df = options_df[['Location', 'filename']].set_index('Location')
 
-options = {"-": [""]}
-
-for index, row in locations_df.iterrows():
-    row_as_list = row.tolist()
-    options[index] =  row_as_list
+options = ["-"] + list(location_df.Location.unique())
 
 st.write("# Boreal Forecast GPP Forecast")
 
@@ -142,9 +138,10 @@ st.markdown(
 # st.write("I'm ", age, 'years old')
 
 #st.sidebar.button("About")
-location_name = st.selectbox("Choose a location", page_names_to_funcs.keys())
+location_name = st.selectbox("Choose a location", options.keys())
+location_filename = locations_df.loc[(locations_df["Location"] == location_name)].values[0]
 #page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
-single_location_analysis(options[location_name][0], location_name)
+single_location_analysis(location_filename, location_name)
 
 if location_name == "-":
     lat, long = none_selected(options_df)
