@@ -2,6 +2,8 @@ import streamlit as st
 
 st.title("Request a New Location")
 
+current = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
+
 # Request location name
 location_name = st.text_input("Enter Location Name:")
 
@@ -16,3 +18,9 @@ st.write("You entered the following information:")
 st.write(f"Location Name: {location_name}")
 st.write(f"Latitude: {lat}")
 st.write(f"Longitude: {long}")
+
+if lat in current.Lat.values and long in current.Long.values:
+    location_name = current.loc[(current["Lat"] == lat) & (current["Long"] == long), "Location"].values[0]
+    st.write(f"This location is already an option. It is called {location_name}")
+else:
+    st.button("Request")
