@@ -29,7 +29,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
         st.markdown(f'# Select a Location')
         return ""
     
-    st.markdown(f'# {location1} & {location2}')
+    st.markdown(f'# {location1} vs. {location2}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     loc_1_file_name = "/streamlit_data/data/" + file1 + ".csv"
@@ -58,10 +58,7 @@ def multiple_location_analysis(file1, file2, location1, location2):
     loc2_gpp_avg = loc2_df.Gpp.mean()
     
     st.write(f'This is a comparison between {location1} and {location2}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    st.write(f'{location1} will have an mean monthly Gpp of {loc1_gpp_avg} while {location2} will have a mean monthly Gpp of {loc2_gpp_avg}')
-    
-    # Create the Streamlit app
-    st.title("Gpp Data Visualization")
+    st.write(f'{location1} will have an mean monthly Gpp of {round(loc1_gpp_avg)} while {location2} will have a mean monthly Gpp of {round(loc2_gpp_avg)}')
 
     # Create the sliders
     col1, col2 = st.columns(2)
