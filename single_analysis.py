@@ -11,15 +11,15 @@ def none_selected(options_df):
     #options_df = options_df[["Lat","Long","filename"]]
     lat = "-"
     long = "-"
-    lat_options = [lat] + list(options[(options.Lat == Long)].Long.unique())
-    long_options = [long] + list(options[(options.Lat == lat)].Long.unique())
+    lat_options = [lat] + list(options_df[(options_df.Lat == Long)].Long.unique())
+    long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
 
     col1, col2 = st.columns(2)
     with col1:
-        lat_options = [lat] + list(options[(options.Lat == Long)].Long.unique())
+        lat_options = [lat] + list(options_df[(options_df.Lat == Long)].Long.unique())
         lat = st.selectbox("Select Latitude", lat_options)
     with col2:
-        long_options = [long] + list(options[(options.Lat == lat)].Long.unique())
+        long_options = [long] + list(options_df[(options_df.Lat == lat)].Long.unique())
         long = st.selectbox("Select Longitude", long_options)
 
     
