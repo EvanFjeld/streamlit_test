@@ -55,8 +55,6 @@ def multiple_location_analysis(file1, file2, location1, location2):
     end_year = max_date.year
     
     st.write(f'This is a comparison between {location1} and {location2}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    # st.write("Starting date:", min_date)
-    # st.write("Max date:", max_date)
     
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
