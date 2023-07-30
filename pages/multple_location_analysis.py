@@ -184,4 +184,4 @@ with loc_col2:
     location_2_name = st.selectbox("Choose the second location", location2_options)
     if location_1_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_1_name), "filename"].values[0]
 
-multiple_location_analysis(loc_1_filenamek, loc_2_filename, location_1_name, location_2_name)
+multiple_location_analysis(loc_1_filename, loc_2_filename, location_1_name, location_2_name)
