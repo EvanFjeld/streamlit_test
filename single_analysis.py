@@ -30,6 +30,8 @@ def none_selected(options_df):
     return file_name
 
 def single_location_analysis(file, location):
+    if location = "-": return ""
+    
     st.markdown(f'# {location_name}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
