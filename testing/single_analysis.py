@@ -2,6 +2,7 @@ import streamlit as st
 import time
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 def none_selected(options_df):
@@ -11,6 +12,9 @@ def none_selected(options_df):
     #options_df = options_df[["Lat","Long","filename"]]
     lat = "-"
     long = "-"
+
+    options_df = options_df.dropna(subset=['Lat','Long'])
+    
     if long == "-": lat_options = [lat] + list(options_df.Lat.unique())
     else: lat_options = [lat] + list(options_df[(options_df.Long == long)].Lat.unique())
     
@@ -34,8 +38,10 @@ def none_selected(options_df):
 def single_location_analysis(file, location):
     if location == "-": return ""
     
+    st.markdown(f'# {location}')
+    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/" + file + ".csv"
+    file_name = "/streamlit_data/data/" + file + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     # Convert the 'date' column to datetime type
@@ -48,24 +54,13 @@ def single_location_analysis(file, location):
     start_year = min_date.year
     end_month = max_date.strftime("%B")
     end_year = max_date.year
-
-    gpp = df.Gpp.sum()
-    forecasted_df = df[df.isforecasted == True]
-    forecasted_gpp = forecasted_df.Gpp.sum()
-    actual_df = df[df.isforecasted == False]
-    actual_gpp = actual_df.Gpp.sum()
-
-    forecast_startdate = forecasted_df.date.min()
-    forcast_month = max_date.strftime("%B")
-    forecast_year = max_date.year
     
-    st.markdown(f'# {location}')
-    #st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-    st.markdown(f'We project that {location} will have a GPP of {round(gpp)} from {start_month}, {start_year} to {end_month}, {end_year}.')
-    st.markdown(f'Of that, {round(actual_gpp)} was measured between {start_month}, {start_year} and {forcast_month}, {round(forecast_year)}. From that point on, we forecasted that {location} will capture an additional {forecasted_gpp} until {end_month}, {end_year}')
-    
+    st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
     # st.write("Starting date:", min_date)
     # st.write("Max date:", max_date)
+    
+    # Create the Streamlit app
+    st.title("Gpp Data Visualization")
 
     # Create the sliders
     col1, col2 = st.columns(2)
@@ -90,12 +85,29 @@ def single_location_analysis(file, location):
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
-    # Line chart with 'Date' as the x-axis and 'Gpp' as the y-axis
-    chart = st.line_chart(data=filtered_df, x='date', y='Gpp')
-    # Plot the graph
-    # plt.plot(df["date"], df["Gpp"])
-    # plt.xlim([start_date, end_date])
-    # plt.show()
+    # Create the Streamlit app
+    st.title("Gpp Data Visualization")
+
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.set_facecolor('black')  # Set black background
+    ax.set_title('Gpp Forecasting', color='white', fontsize=16)  # Set white title
+    
+    # Plot the lines based on 'isforecasted' column
+    for is_forecasted, group in filtered_df.groupby('isforecasted'):
+        linestyle = '-' if is_forecasted else '--'
+        ax.plot(group['date'], group['Gpp'], linestyle=linestyle, label=f'Is Forecasted: {is_forecasted}')
+    
+    ax.legend(loc='best', facecolor='black', edgecolor='white')  # Set legend properties
+    
+    # Set the color of tick labels to white
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    
+    # Display the plot
+    plt.show()
 
     csv = convert_df(df)
 
@@ -111,9 +123,11 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-options_df = saved_options = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/Locations_temp.csv")
+options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
-options = ["-"] + list(options_df.Location.unique())
+location_options = options_df.dropna(subset=['Location'])
+
+options = ["-"] + list(location_options.Location.unique())
 
 st.write("# Boreal Forecast GPP Forecast")
 
