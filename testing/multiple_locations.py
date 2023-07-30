@@ -124,8 +124,8 @@ def multiple_location_analysis(file1, file2, location1, location2):
         
     fig.patch.set_facecolor('black')
     
-    # Display the plot
-    plt.show()
+    # Plot!
+    st.pyplot(fig)
 
     csv = convert_df(df)
 
