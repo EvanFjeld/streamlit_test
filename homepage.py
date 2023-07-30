@@ -21,8 +21,6 @@ show_pages(
 
 st.write("# Welcome to the Boreal Forest Carbon Calculator")
 
-st.sidebar.success("What would you like to do?")
-
 st.markdown(
     """
     Single location or compare mulitple locations. 
