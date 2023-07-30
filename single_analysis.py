@@ -30,7 +30,7 @@ def none_selected(options_df):
     return file_name
 
 def single_location_analysis(file, location):
-    if location = "-": return ""
+    if location == "-": return ""
     
     st.markdown(f'# {location_name}')
     
