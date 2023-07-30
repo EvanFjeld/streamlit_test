@@ -138,7 +138,7 @@ st.markdown(
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", options.keys())
-location_filename = locations_df.loc[(options_df["Location"] == location_name), "filename"].values[0]
+location_filename = options_df.loc[(options_df["Location"] == location_name), "filename"].values[0]
 #page_names_to_funcs[location_name][1](page_names_to_funcs[location_name][0], location_name)
 single_location_analysis(location_filename, location_name)
 
