@@ -12,6 +12,23 @@ st.write("# About the Boreal Forest Carbon Forecaster")
 
 st.image(AWS_BUCKET_URL + image_name, caption='Boreal Forest', use_column_width=True)
 
+st.write("# What is GPP?")
+
+st.markdown(
+    """
+GPP stands for Gross Primary Productivity. It is a crucial concept in the study of Earth's ecosystems and the carbon cycle. GPP represents the total amount of energy that
+primary producers, such as plants and algae, capture through photosynthesis in a given area and time period. Photosynthesis is the process by which plants, algae, and some
+bacteria convert carbon dioxide (CO2) and sunlight into organic matter (usually in the form of glucose) and release oxygen (O2 as a byproduct). This organic matter serves 
+as food for various organisms, and the process of photosynthesis is fundamental in sustaining life on Earth. GPP is a fundamental parameter in understanding the global carbon
+cycle because it quantifies the rate at which carbon is captured from the atmosphere and converted into organic matter. It is a critical variable for assessing the carbon 
+sequestration capacity of ecosystems and their role in mitigating climate change by acting as carbon sinks. Researchers and scientists use various methods, such as satellite
+observations, eddy covariance measurements, and ecosystem models, to estimate GPP at different scales, from individual plants to entire ecosystems and the global level. 
+Understanding GPP helps scientists assess the health and productivity of ecosystems, monitor changes in vegetation, and make predictions about how ecosystems might respond 
+to climate change and human activities.
+""")
+
+st.write("# What is MODIS?")
+
 st.markdown(
     """
     
@@ -26,3 +43,4 @@ other data portals, distributed in Hierarchical Data Format (HDF) for ease of sc
 information on the MODIS program and its advancements since my last knowledge update in September 2021.
 """
 )
+
