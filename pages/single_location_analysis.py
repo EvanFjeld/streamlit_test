@@ -60,10 +60,17 @@ def single_location_analysis(file, location):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
 
+    # creation optional time priods:
+    time_frame_options = ["Monthly", "Yearly"]
+    
     # Create the sliders
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
+        time_frame = st.selectbox("Select Period", time_frame_options)
+        st.write("Preiod:", time_frame)
+        
+    with col2:
         start_date = st.slider("Start Date", 
                            min_value = min_date, 
                            max_value=max_date, 
@@ -72,7 +79,7 @@ def single_location_analysis(file, location):
     
         st.write("Starting date:", start_date)
     
-    with col2:
+    with col3:
         end_date = st.slider("End Date", 
                          min_value = start_date, 
                          max_value=max_date, 
@@ -80,8 +87,20 @@ def single_location_analysis(file, location):
                          format = "YYYY-MM-DD")
         st.write("Ending date:", end_date)
 
-    # Filter the DataFrame based on the selected date range
-    filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
+    # group dataset for time period
+    if time_frame == "Yearly":
+        filtered_df = df.groupby(df['date'].dt.year).agg({
+            'Gpp': 'mean',
+            'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
+        }).reset_index()
+        # Filter the DataFrame based on the selected date range
+        filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
+    else:
+        filtered_df = df
+        # Filter the DataFrame based on the selected date range
+        filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date)]
+    
+    
 
     # Create the plot
     fig, ax = plt.subplots(figsize=(8, 6))
