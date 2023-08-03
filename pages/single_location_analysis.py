@@ -67,8 +67,8 @@ def single_location_analysis(file, location):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        time_frame = st.selectbox("Select Period", time_frame_options)
-        st.write("Preiod:", time_frame)
+        time_frame = st.selectbox("Time Interval", time_frame_options)
+        st.write("Time Interval:", time_frame)
         
     with col2:
         start_date = st.slider("Start Date", 
