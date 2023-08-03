@@ -4,7 +4,13 @@ st.set_page_config(
     page_title="About",
 )
 
+
+AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+image_name = "streamlit_data/about/boreal_forest.jpeg"
+
 st.write("# About the Boreal Forest Carbon Forecaster")
+
+st.image(AWS_BUCKET_URL + image_name, caption='Boreal Forest', use_column_width=True)
 
 st.markdown(
     """
