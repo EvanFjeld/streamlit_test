@@ -67,8 +67,8 @@ def multiple_location_analysis(file1, file2, location1, location2):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        time_frame = st.selectbox("Select Period", time_frame_options)
-        st.write("Preiod:", time_frame)
+        time_frame = st.selectbox("STime Interval", time_frame_options)
+        st.write("Time Interval:", time_frame)
         
     with col2:
         start_date = st.slider("Start Date", 
