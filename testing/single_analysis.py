@@ -60,10 +60,16 @@ def single_location_analysis(file, location):
     # Create the Streamlit app
     st.title("Gpp Data Visualization")
 
+    # creation optional time priods:
+    time_frame_options = ["Monthly", "Yearly"]
+    
     # Create the sliders
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(2)
     
     with col1:
+        time_frame = st.selectbox("Select Period", time_frame_options)
+        
+    with col2:
         start_date = st.slider("Start Date", 
                            min_value = min_date, 
                            max_value=max_date, 
@@ -72,7 +78,7 @@ def single_location_analysis(file, location):
     
         st.write("Starting date:", start_date)
     
-    with col2:
+    with col3:
         end_date = st.slider("End Date", 
                          min_value = start_date, 
                          max_value=max_date, 
