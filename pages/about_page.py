@@ -31,7 +31,6 @@ st.write("# What is MODIS?")
 
 st.markdown(
     """
-    
 The MODIS (Moderate Resolution Imaging Spectroradiometer) dataset is a product of NASA's Earth Observing System (EOS) program and is obtained from instruments aboard two 
 satellites: Terra (launched in 1999) and Aqua (launched in 2002). This dataset plays a crucial role in monitoring various Earth processes and gathering data on the planet's 
 surface and atmosphere. It offers a combination of high spatial detail and global coverage, providing data at spatial resolutions of 250 meters, 500 meters, and 1 kilometer. 
@@ -44,3 +43,11 @@ information on the MODIS program and its advancements since my last knowledge up
 """
 )
 
+st.write("# About the Project")
+
+st.markdown(
+    """
+This project was completed by Anshuman Awathi, Patricia Gallagher, and Evan Fjeld with support from the Wildland's Leauge as the final project for the University
+of California at Berkeley's School of Information Master's in Data Science program. The final project was complated in the summer term of 2023.
+"""
+)
