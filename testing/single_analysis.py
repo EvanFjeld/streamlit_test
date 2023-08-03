@@ -64,7 +64,7 @@ def single_location_analysis(file, location):
     time_frame_options = ["Monthly", "Yearly"]
     
     # Create the sliders
-    col1, col2, col3 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
         time_frame = st.selectbox("Select Period", time_frame_options)
