@@ -6,7 +6,7 @@ st.set_page_config(
 
 
 AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-image_name = "streamlit_data/about/boreal_forest.jpeg"
+image_name = "/streamlit_data/about/boreal_forest.jpeg"
 
 st.write("# About the Boreal Forest Carbon Forecaster")
 
