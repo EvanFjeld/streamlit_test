@@ -93,6 +93,7 @@ def single_location_analysis(file, location):
             'Gpp': 'mean',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
+        st.write("Preiod:", time_frame)
     else:
         filtered_df = df
     
