@@ -68,6 +68,7 @@ def single_location_analysis(file, location):
     
     with col1:
         time_frame = st.selectbox("Select Period", time_frame_options)
+        st.write("Preiod:", time_frame)
         
     with col2:
         start_date = st.slider("Start Date", 
@@ -86,6 +87,15 @@ def single_location_analysis(file, location):
                          format = "YYYY-MM-DD")
         st.write("Ending date:", end_date)
 
+    # group dataset for time period
+    if time_frame == "Yearly":
+        filtered_df = df.groupby(df['date'].dt.year).agg({
+            'Gpp': 'mean',
+            'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
+        }).reset_index()
+    else:
+        filtered_df = df
+    
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
 
