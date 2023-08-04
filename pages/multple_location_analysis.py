@@ -90,8 +90,8 @@ def multiple_location_analysis(file1, file2, location1, location2):
     # group dataset for time period
     if time_frame == "Yearly":
         filtered_df = df.groupby(df['date'].dt.year).agg({
-            'Gpp_loc1': 'mean',
-            'Gpp_loc2': 'mean',
+            'Gpp_loc1': 'sum',
+            'Gpp_loc2': 'sum',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
