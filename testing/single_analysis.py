@@ -42,6 +42,7 @@ def single_location_analysis(file, location):
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/data/" + file + "_" + models[model] + ".csv"
+    st.write(file_name)    
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     # Convert the 'date' column to datetime type
@@ -56,13 +57,9 @@ def single_location_analysis(file, location):
     end_year = max_date.year
     
     st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
-
-
     
     col1a, col2a = st.columns(2)
 
-    
-    
     with col1a:
         start_date = st.slider("Start Date", 
                            min_value = min_date, 
