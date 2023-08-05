@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
+import urllib.error
+from urllib.error import HTTPError
 
 def none_selected(options_df):
     st.write("Don't know the location name?")
