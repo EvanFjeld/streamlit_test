@@ -39,18 +39,6 @@ def single_location_analysis(file, location):
     if location == "-": return ""
     
     st.title(f'{location}')
-    
-    # Create the sliders
-    col1, col2, col3 = st.columns(3)
-    
-    # creation optional time priods:
-    time_frame_options = ["Monthly", "Yearly"]
-    #models
-    models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
-    
-    with col1:
-        time_frame = st.selectbox("Time Interval", time_frame_options)
-        model = st.selectbox("Model Projection", models.keys())
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/data/" + file + "_" + models[model] + ".csv"
@@ -167,6 +155,20 @@ st.markdown(
 location_name = st.selectbox("Choose a location", options)
 location_filename = "-"
 if location_name != "-": location_filename = options_df.loc[(options_df["Location"] == location_name), "filename"].values[0]
+
+# Create the sliders
+col1, col2, col3 = st.columns(3)
+
+# creation optional time priods:
+time_frame_options = ["Monthly", "Yearly"]
+#models
+models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+
+with col1:
+    time_frame = st.selectbox("Time Interval", time_frame_options)
+    model = st.selectbox("Model Projection", models.keys())
+
+location_filename = location_filename + "_" + models[model]
 
 single_location_analysis(location_filename, location_name)
 
