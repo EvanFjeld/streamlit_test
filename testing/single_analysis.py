@@ -40,8 +40,15 @@ def single_location_analysis(file, location):
     
     st.title(f'{location}')
     
+    # Create the sliders
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        time_frame = st.selectbox("Time Interval", time_frame_options)
+        model = st.selectbox("Model Projection", models.keys())
+
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/data/" + file + ".csv"
+    file_name = "/streamlit_data/data/" + file + "_" + models[model] + ".csv"
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
     # Convert the 'date' column to datetime type
@@ -62,14 +69,11 @@ def single_location_analysis(file, location):
     #models
     models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
     
-    # Create the sliders
-    col1, col2, col3 = st.columns(3)
+    col1a, col2a = st.columns(2)
+
     
-    with col1:
-        time_frame = st.selectbox("Time Interval", time_frame_options)
-        model = st.selectbox("Model Projection", models.keys())
-        
-    with col2:
+    
+    with col1a:
         start_date = st.slider("Start Date", 
                            min_value = min_date, 
                            max_value=max_date, 
@@ -78,7 +82,7 @@ def single_location_analysis(file, location):
     
         st.write("Starting date:", start_date)
     
-    with col3:
+    with col2a:
         end_date = st.slider("End Date", 
                          min_value = start_date, 
                          max_value=max_date, 
