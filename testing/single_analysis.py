@@ -39,14 +39,14 @@ def none_selected(options_df):
 
 def single_location_analysis(file, location, model_name):
     if location == "-": return ""
-    
-    st.title(f'{location}')
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/data/" + file + ".csv"
     try:
         df = pd.read_csv(AWS_BUCKET_URL + file_name)
+        st.title(f'{location}')
     except HTTPError:
+        st.title(f'{location} not available with the {model_name.lower()}-term model')
         st.write(f'The {model_name.lower()}-term model is not avaialble for {location}. Please select another location or model.')
         return ""
 
