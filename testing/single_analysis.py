@@ -42,8 +42,11 @@ def single_location_analysis(file, location):
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/data/" + file + ".csv"
-    st.write(file_name)    
-    df = pd.read_csv(AWS_BUCKET_URL + file_name)
+    try:
+        df = pd.read_csv(AWS_BUCKET_URL + file_name)
+    except:
+        st.write(f'The {}-term model is not avaialble for {location}. Please select another location or model.')
+        return ""
 
     # Convert the 'date' column to datetime type
     #df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
@@ -166,7 +169,7 @@ with col1:
     model = st.selectbox("Model Projection", models.keys())
 
 location_filename = location_filename + "_" + models[model]
-st.write(location_filename)
+#st.write(location_filename)
 
 single_location_analysis(location_filename, location_name)
 
