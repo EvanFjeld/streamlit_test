@@ -41,7 +41,7 @@ def single_location_analysis(file, location):
     st.title(f'{location}')
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/data/" + file + "_" + models[model] + ".csv"
+    file_name = "/streamlit_data/data/" + file + ".csv"
     st.write(file_name)    
     df = pd.read_csv(AWS_BUCKET_URL + file_name)
 
