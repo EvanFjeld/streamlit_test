@@ -45,7 +45,7 @@ def single_location_analysis(file, location, model_name):
     try:
         df = pd.read_csv(AWS_BUCKET_URL + file_name)
     except HTTPError:
-        st.write(f'The {model_name}-term model is not avaialble for {location}. Please select another location or model.')
+        st.write(f'The {model_name.lower()}-term model is not avaialble for {location}. Please select another location or model.')
         return ""
 
     # Convert the 'date' column to datetime type
