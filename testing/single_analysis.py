@@ -35,7 +35,7 @@ def none_selected(options_df):
         st.write(location_name)
         single_location_analysis(file_name, location_name)
 
-def single_location_analysis(file, location):
+def single_location_analysis(file, location, model_name):
     if location == "-": return ""
     
     st.title(f'{location}')
@@ -45,7 +45,7 @@ def single_location_analysis(file, location):
     try:
         df = pd.read_csv(AWS_BUCKET_URL + file_name)
     except HTTPError:
-        st.write(f'The {}-term model is not avaialble for {location}. Please select another location or model.')
+        st.write(f'The {model_name}-term model is not avaialble for {location}. Please select another location or model.')
         return ""
 
     # Convert the 'date' column to datetime type
@@ -171,7 +171,7 @@ with col1:
 location_filename = location_filename + "_" + models[model]
 #st.write(location_filename)
 
-single_location_analysis(location_filename, location_name)
+single_location_analysis(location_filename, location_name, model)
 
 if location_name == "-":
     none_selected(options_df)
