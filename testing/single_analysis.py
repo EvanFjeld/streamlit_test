@@ -169,6 +169,7 @@ with col1:
     model = st.selectbox("Model Projection", models.keys())
 
 location_filename = location_filename + "_" + models[model]
+st.write(location_filename)
 
 single_location_analysis(location_filename, location_name)
 
