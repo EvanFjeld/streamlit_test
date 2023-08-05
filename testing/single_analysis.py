@@ -43,6 +43,11 @@ def single_location_analysis(file, location):
     # Create the sliders
     col1, col2, col3 = st.columns(3)
     
+    # creation optional time priods:
+    time_frame_options = ["Monthly", "Yearly"]
+    #models
+    models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+    
     with col1:
         time_frame = st.selectbox("Time Interval", time_frame_options)
         model = st.selectbox("Model Projection", models.keys())
@@ -64,10 +69,7 @@ def single_location_analysis(file, location):
     
     st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
 
-    # creation optional time priods:
-    time_frame_options = ["Monthly", "Yearly"]
-    #models
-    models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+
     
     col1a, col2a = st.columns(2)
 
