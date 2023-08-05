@@ -44,7 +44,7 @@ def single_location_analysis(file, location):
     file_name = "/streamlit_data/data/" + file + ".csv"
     try:
         df = pd.read_csv(AWS_BUCKET_URL + file_name)
-    except:
+    except HTTPError:
         st.write(f'The {}-term model is not avaialble for {location}. Please select another location or model.')
         return ""
 
