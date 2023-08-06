@@ -35,17 +35,22 @@ def none_selected(options_df):
         st.write(location_name)
         single_location_analysis(file_name, location_name)
 
-def single_location_analysis(file, location):
+def single_location_analysis(file, location, model_name, model):
     if location == "-": return ""
     
     st.title(f'{location}')
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/data/" + file + ".csv"
-    df = pd.read_csv(AWS_BUCKET_URL + file_name)
+    file_name = "/streamlit_data/data/" + model + "/" + file + ".csv"
+    try:
+        df = pd.read_csv(AWS_BUCKET_URL + file_name)
+        st.title(f'{location}')
+    except HTTPError:
+        st.title(f'{location} not available with the {model_name.lower()}-term model')
+        st.write(f'The {model_name.lower()}-term model is not avaialble for {location}. Please select another location or model.')
+        return ""
 
     # Convert the 'date' column to datetime type
-    #df['date'] = pd.to_datetime(df['date']).dt.to_period('M')
     df['date'] = pd.to_datetime(df.date)
 
     min_date = df.date.min().to_pydatetime()
@@ -152,15 +157,24 @@ st.markdown(
 """
 )
 
-# age = st.slider('How old are you?', 0, 130, 25)
-# st.write("I'm ", age, 'years old')
+# creation optional time priods:
+time_frame_options = ["Monthly", "Yearly"]
+#models
+#models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+models = {"Model": "Model6"}
+
+# set model - comment this out and replace with options if necessary
+model = "Model"
 
 #st.sidebar.button("About")
 location_name = st.selectbox("Choose a location", options)
 location_filename = "-"
 if location_name != "-": location_filename = options_df.loc[(options_df["Location"] == location_name), "filename"].values[0]
 
-single_location_analysis(location_filename, location_name)
+single_location_analysis(file = location_filename, 
+                         location = location_name, 
+                         model_name = model,
+                         model = models[model])
 
 if location_name == "-":
     none_selected(options_df)
