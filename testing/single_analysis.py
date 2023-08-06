@@ -37,11 +37,11 @@ def none_selected(options_df):
         st.write(location_name)
         single_location_analysis(file_name, location_name)
 
-def single_location_analysis(file, location, model_name):
+def single_location_analysis(file, location, model_name, model):
     if location == "-": return ""
 
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    file_name = "/streamlit_data/data/" + file + ".csv"
+    file_name = "/streamlit_data/data/" + model + "/" + file + ".csv"
     try:
         df = pd.read_csv(AWS_BUCKET_URL + file_name)
         st.title(f'{location}')
@@ -164,16 +164,20 @@ col1, col2, col3 = st.columns(3)
 # creation optional time priods:
 time_frame_options = ["Monthly", "Yearly"]
 #models
-models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+#models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+models = {"Model": "Model6"}
 
 with col1:
     time_frame = st.selectbox("Time Interval", time_frame_options)
     model = st.selectbox("Model Projection", models.keys())
 
-location_filename = location_filename + "_" + models[model]
+# location_filename = location_filename + "_" + models[model]
 #st.write(location_filename)
 
-single_location_analysis(location_filename, location_name, model)
+single_location_analysis(file = location_filename, 
+                         location = location_name, 
+                         model_name = model,
+                         model = models[model])
 
 if location_name == "-":
     none_selected(options_df)
