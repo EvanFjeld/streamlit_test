@@ -34,7 +34,7 @@ def none_selected(options_df, model_name, model):
         location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
         single_location_analysis(file = file_name, location = location_name, model_name = model_name, model = model)
 
-def single_location_analysis(file, location, model_name, model):
+def single_location_analysis(file = "", location = "", model_name = "Model", model = "Model6"):
     if location == "-": return ""
     
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
