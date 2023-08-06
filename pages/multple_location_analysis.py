@@ -75,7 +75,7 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     st.write(f'{location1} will have an mean monthly Gpp of {round(loc1_gpp_avg)} while {location2} will have a mean monthly Gpp of {round(loc2_gpp_avg)}')
 
     # creation optional time priods:
-    time_frame_options = ["Monthly", "Yearly"]
+    time_frame_options = ["Monthly", "Quarterly", "Yearly"]
     
     # Create the sliders
     col1, col2, col3 = st.columns(3)
@@ -104,8 +104,16 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     # group dataset for time period
     if time_frame == "Yearly":
         filtered_df = df.groupby(df['date'].dt.year).agg({
-            'Gpp_loc1': 'mean',
-            'Gpp_loc2': 'mean',
+            'Gpp_loc1': 'sum',
+            'Gpp_loc2': 'sum',
+            'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
+        }).reset_index()
+        # Filter the DataFrame based on the selected date range
+        filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
+    elif time_frame == "Yearly":
+        filtered_df = df.groupby(pd.Grouper(key='date', freq='Q')).agg({
+            'Gpp_loc1': 'sum',
+            'Gpp_loc2': 'sum',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
