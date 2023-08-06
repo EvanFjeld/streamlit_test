@@ -118,14 +118,16 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
-        filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
+        #filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
+        filtered_df = filtered_df[(filtered_df.date >= start_date.dt.to_period('Q')) & (filtered_df.date <= end_date.dt.to_period('Q'))]
+        #filtered_df = filtered_df[(filtered_df['date'].dt.to_period('Q') >= start_quarter) & (filtered_df['date'].dt.to_period('Q') <= end_quarter)]
     else:
         filtered_df = df
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date)]
 
     # Filter the DataFrame based on the selected date range
-    filtered_df = filtered_df[(df.date >= start_date) & (df.date <= end_date)]
+    #filtered_df = filtered_df[(df.date >= start_date) & (df.date <= end_date)]
 
     filtered_df['date'] = pd.to_datetime(filtered_df['date'])
     
