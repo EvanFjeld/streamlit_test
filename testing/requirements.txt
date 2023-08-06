@@ -1,5 +1,0 @@
-matplotlib
-pandas
-mpld3
-st_pages
-plotly
