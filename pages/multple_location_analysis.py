@@ -112,15 +112,16 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
     elif time_frame == "Quarterly":
-        filtered_df = df.groupby(pd.Grouper(key='date', freq='Q')).agg({
-            'Gpp_loc1': 'sum',
-            'Gpp_loc2': 'sum',
+        filtered_df = df
+        filtered_df.date = pd.PeriodIndex(filtered_df.date, freq='Q')
+        filtered_df = filtered_df.groupby('date').agg({
+            'Gpp_loc1': 'mean',
+            'Gpp_loc2': 'mean',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
-        #filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
-        filtered_df = filtered_df[(filtered_df.date >= start_date.dt.to_period('Q')) & (filtered_df.date <= end_date.dt.to_period('Q'))]
-        #filtered_df = filtered_df[(filtered_df['date'].dt.to_period('Q') >= start_quarter) & (filtered_df['date'].dt.to_period('Q') <= end_quarter)]
+        filtered_df = filtered_df[(filtered_df.date >= pd.Period(start_date, freq='Q')) & (filtered_df.date <= pd.Period(end_date, freq='Q'))]
+        filtered_df['date'] = filtered_df['date'].dt.to_timestamp()
     else:
         filtered_df = df
         # Filter the DataFrame based on the selected date range
