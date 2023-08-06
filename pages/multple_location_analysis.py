@@ -105,8 +105,8 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     # group dataset for time period
     if time_frame == "Yearly":
         filtered_df = df.groupby(df['date'].dt.year).agg({
-            'Gpp_loc1': 'sum',
-            'Gpp_loc2': 'sum',
+            'Gpp_loc1': 'mean',
+            'Gpp_loc2': 'mean',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
@@ -169,6 +169,9 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     ax.spines['bottom'].set_color('white')
         
     fig.patch.set_facecolor('black')
+
+    # Set the y-axis to start at 0
+    ax.set_ylim(bottom=0)
     
     # Plot!
     st.pyplot(fig)
