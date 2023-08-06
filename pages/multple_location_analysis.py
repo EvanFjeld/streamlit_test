@@ -116,7 +116,7 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
         filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date)]
 
     # Filter the DataFrame based on the selected date range
-    filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
+    filtered_df = filtered_df[(df.date >= start_date) & (df.date <= end_date)]
 
     filtered_df['date'] = pd.to_datetime(filtered_df['date'])
     
