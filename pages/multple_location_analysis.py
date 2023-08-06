@@ -111,7 +111,7 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
         }).reset_index()
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
-    elif time_frame == "Yearly":
+    elif time_frame == "Quarterly":
         filtered_df = df.groupby(pd.Grouper(key='date', freq='Q')).agg({
             'Gpp_loc1': 'sum',
             'Gpp_loc2': 'sum',
