@@ -34,9 +34,9 @@ def none_selected(options_df, model_name, model):
         location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
         st.write(location_name)
         single_location_analysis(file = file_name, 
-                         location = location_name, 
-                         model_name = model_name,
-                         model = model)
+                                 location = location_name, 
+                                 model_name = model_name,
+                                 model = model)
 
 def single_location_analysis(file, location, model_name, model):
     if location == "-": return ""
