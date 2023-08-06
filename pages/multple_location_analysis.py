@@ -228,8 +228,8 @@ with loc_col2:
     if location_1_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_2_name), "filename"].values[0]
     else: loc_2_filename = 'average'
 
-if location_1_name != "-" & location_2_name != "-"
-multiple_location_analysis(file1 = loc_1_filename, 
+if location_1_name != "-" & location_2_name != "-":
+    multiple_location_analysis(file1 = loc_1_filename, 
                            file2 = loc_2_filename, 
                            location1 = location_1_name, 
                            location2 = location_2_name,
