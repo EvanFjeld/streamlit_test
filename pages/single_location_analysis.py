@@ -38,8 +38,6 @@ def none_selected(options_df):
 def single_location_analysis(file, location, model_name, model):
     if location == "-": return ""
     
-    st.title(f'{location}')
-    
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     file_name = "/streamlit_data/data/" + model + "/" + file + ".csv"
     try:
