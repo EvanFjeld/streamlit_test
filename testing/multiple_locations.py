@@ -8,20 +8,20 @@ from mpld3 import plugins
 import streamlit.components.v1 as components
 from datetime import datetime
 
-def none_selected(file, num):
-    st.write("Don't know the location name?")
-    st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
+# def none_selected(file, num):
+#     st.write("Don't know the location name?")
+#     st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
 
-    # Create 2 columns for latitude and longitude for comparison
-    ll_col1, ll_col2 = st.columns(2)
-    with ll_col1:
-        st.write("Location #1")
-        loc1_lat = st.selectbox("Location 1 Latitude", page_names_to_funcs.keys())
-        loc1_long = st.selectbox("Location 1 Longitude", page_names_to_funcs.keys())
-    with ll_col2:
-        st.write("Location #2")
-        loc2_lat = st.selectbox("Location 2 Latitude", page_names_to_funcs.keys())
-        loc2_long = st.selectbox("Location 2 Longitude", page_names_to_funcs.keys())
+#     # Create 2 columns for latitude and longitude for comparison
+#     ll_col1, ll_col2 = st.columns(2)
+#     with ll_col1:
+#         st.write("Location #1")
+#         loc1_lat = st.selectbox("Location 1 Latitude", page_names_to_funcs.keys())
+#         loc1_long = st.selectbox("Location 1 Longitude", page_names_to_funcs.keys())
+#     with ll_col2:
+#         st.write("Location #2")
+#         loc2_lat = st.selectbox("Location 2 Latitude", page_names_to_funcs.keys())
+#         loc2_long = st.selectbox("Location 2 Longitude", page_names_to_funcs.keys())
         
 
 def multiple_location_analysis(file1, file2, location1, location2, model_name, model):
@@ -34,6 +34,7 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
     
     loc_1_file_name = "/streamlit_data/data/" + model + "/" + file1 + ".csv"
+    st.write(loc_1_file_name)
     try:
         loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
     except HTTPError:
