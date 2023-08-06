@@ -96,6 +96,7 @@ def single_location_analysis(file, location, model_name, model):
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
     elif time_frame == "Quarterly":
+        filtered_df = df
         filtered_df.date = pd.PeriodIndex(df.date, freq='Q')
         filtered_df = filtered_df.groupby('date').agg({
             'Gpp': 'mean',
