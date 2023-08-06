@@ -60,6 +60,7 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     loc2_df['date'] = pd.to_datetime(loc2_df.date)
 
     df = loc1_df.merge(loc2_df, on='date', suffixes=('_loc1', '_loc2'))
+    df['date'] = pd.to_datetime(df['date'])    
 
     min_date = df.date.min().to_pydatetime()
     max_date = df.date.max().to_pydatetime()
