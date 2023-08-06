@@ -32,11 +32,7 @@ def none_selected(options_df, model_name, model):
     if lat != "-" and long != "-": 
         file_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "filename"].values[0]
         location_name = options_df.loc[(options_df["Lat"] == lat) & (options_df["Long"] == long), "Location"].values[0]
-        st.write(location_name)
-        single_location_analysis(file = file_name, 
-                                 location = location_name, 
-                                 model_name = model_name,
-                                 model = model)
+        single_location_analysis(file = file_name, location = location_name, model_name = model_name, model = model)
 
 def single_location_analysis(file, location, model_name, model):
     if location == "-": return ""
@@ -191,6 +187,4 @@ single_location_analysis(file = location_filename,
                          model = models[model])
 
 if location_name == "-":
-    none_selected(options_df = options_df, 
-                  model_name = model,
-                 model = models[model])
+    none_selected(options_df = options_df, model_name = model, model = models[model])
