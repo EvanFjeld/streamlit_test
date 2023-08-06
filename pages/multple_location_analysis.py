@@ -50,12 +50,6 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
         st.write(f'The {model_name.lower()}-term model is not avaialble for {location2}. Please select another location or model.')
         return ""
     
-    
-    # AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    # loc_1_file_name = "/streamlit_data/data/" + file1 + ".csv"
-    # loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
-    # loc_2_file_name = "/streamlit_data/data/" + file2 + ".csv"
-    # loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
 
     loc1_df = loc1_df[['date', 'Gpp', 'isforecasted']]
     loc2_df = loc2_df[['date', 'Gpp']]
@@ -80,10 +74,17 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     st.write(f'This is a comparison between {location1} and {location2}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
     st.write(f'{location1} will have an mean monthly Gpp of {round(loc1_gpp_avg)} while {location2} will have a mean monthly Gpp of {round(loc2_gpp_avg)}')
 
+    # creation optional time priods:
+    time_frame_options = ["Monthly", "Yearly"]
+    
     # Create the sliders
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
+        time_frame = st.selectbox("Time Interval", time_frame_options)
+        st.write("Time Interval:", time_frame)
+    
+    with col2:
         start_date = st.slider("Start Date", 
                            min_value = min_date, 
                            max_value=max_date, 
@@ -92,13 +93,26 @@ def multiple_location_analysis(file1, file2, location1, location2, model_name, m
     
         st.write("Starting date:", start_date)
     
-    with col2:
+    with col3:
         end_date = st.slider("End Date", 
                          min_value = start_date, 
                          max_value=max_date, 
                          value = max_date, 
                          format = "YYYY-MM-DD")
         st.write("Ending date:", end_date)
+
+    # group dataset for time period
+    if time_frame == "Yearly":
+        filtered_df = df.groupby(df['date'].dt.year).agg({
+            'Gpp': 'sum',
+            'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
+        }).reset_index()
+        # Filter the DataFrame based on the selected date range
+        filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
+    else:
+        filtered_df = df
+        # Filter the DataFrame based on the selected date range
+        filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date)]
 
     # Filter the DataFrame based on the selected date range
     filtered_df = df[(df.date >= start_date) & (df.date <= end_date)]
