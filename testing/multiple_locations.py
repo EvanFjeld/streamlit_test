@@ -24,18 +24,37 @@ def none_selected(file, num):
         loc2_long = st.selectbox("Location 2 Longitude", page_names_to_funcs.keys())
         
 
-def multiple_location_analysis(file1, file2, location1, location2):
+def multiple_location_analysis(file1, file2, location1, location2, model_name, model):
     if location1 == "-" or location2 == "-":
         st.markdown(f'# Select a Location')
         return ""
     
     st.markdown(f'# {location1} vs. {location2}')
-    
+
     AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
-    loc_1_file_name = "/streamlit_data/data/" + file1 + ".csv"
-    loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
-    loc_2_file_name = "/streamlit_data/data/" + file2 + ".csv"
-    loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
+    
+    loc_1_file_name = "/streamlit_data/data/" + model + "/" + file1 + ".csv"
+    try:
+        loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
+    except HTTPError:
+        st.title(f'{location1} not available with the {model_name.lower()}-term model')
+        st.write(f'The {model_name.lower()}-term model is not avaialble for {location1}. Please select another location or model.')
+        return ""
+
+    loc_2_file_name = "/streamlit_data/data/" + model + "/" + file2 + ".csv"
+    try:
+        loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
+    except HTTPError:
+        st.title(f'{location2} not available with the {model_name.lower()}-term model')
+        st.write(f'The {model_name.lower()}-term model is not avaialble for {location2}. Please select another location or model.')
+        return ""
+    
+    
+    # AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+    # loc_1_file_name = "/streamlit_data/data/" + file1 + ".csv"
+    # loc1_df = pd.read_csv(AWS_BUCKET_URL + loc_1_file_name)
+    # loc_2_file_name = "/streamlit_data/data/" + file2 + ".csv"
+    # loc2_df = pd.read_csv(AWS_BUCKET_URL + loc_2_file_name)
 
     loc1_df = loc1_df[['date', 'Gpp', 'isforecasted']]
     loc2_df = loc2_df[['date', 'Gpp']]
@@ -147,6 +166,15 @@ st.markdown(
 """
 )
 
+# creation optional time priods:
+time_frame_options = ["Monthly", "Yearly"]
+#models
+#models = {"Short": "Model3", "Medium": "Model4", "Long": "Model5"}
+models = {"Model": "Model6"}
+
+# set model - comment this out and replace with options if necessary
+model = "Model"
+
 # Columns for 2 locations to compare
 options_df = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 location_options = options_df.dropna(subset=['Location'])
@@ -172,4 +200,9 @@ with loc_col2:
     if location_1_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_2_name), "filename"].values[0]
     else: loc_2_filename = 'average'
 
-multiple_location_analysis(loc_1_filename, loc_2_filename, location_1_name, location_2_name)
+multiple_location_analysis(file1 = loc_1_filename, 
+                           file2 = loc_2_filename, 
+                           location1 = location_1_name, 
+                           location2 = location_2_name,
+                           model_name = model,
+                           model = models[model])
