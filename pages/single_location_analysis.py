@@ -96,13 +96,14 @@ def single_location_analysis(file, location, model_name, model):
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
     elif time_frame == "Quarterly":
-        filtered_df = df.groupby(pd.Grouper(key='date', freq='Q')).agg({
+        filtered_df = pd.PeriodIndex(df.date, freq='Q')
+        filtered_df = df.groupby(df['date']).agg({
             'Gpp': 'mean',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
         #filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
-        filtered_df = filtered_df[(filtered_df.date >= start_date.quarter) & (filtered_df.date <= end_date.quarter)]
+        filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date.quarter)]
     else:
         filtered_df = df
         # Filter the DataFrame based on the selected date range
