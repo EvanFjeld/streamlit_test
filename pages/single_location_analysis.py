@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-def none_selected(options_df):
+def none_selected(options_df, model_name, model):
     st.write("Don't know the location name?")
     st.markdown("If you don't have a location name in mind, select a latitude and longitude to see the analysis for that location.")
 
@@ -175,4 +175,6 @@ single_location_analysis(file = location_filename,
                          model = models[model])
 
 if location_name == "-":
-    none_selected(options_df)
+    none_selected(options_df = options_df, 
+                  model_name = model,
+                 model = models[model])
