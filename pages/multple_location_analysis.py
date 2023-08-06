@@ -225,7 +225,7 @@ with loc_col1:
 with loc_col2:
     if location_1_name != "-": location2_options = [x for x in location1_options if x != location_1_name]
     location_2_name = st.selectbox("Choose the second location", location2_options)
-    if location_1_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_2_name), "filename"].values[0]
+    if location_2_name != "-": loc_2_filename = options_df.loc[(options_df["Location"] == location_2_name), "filename"].values[0]
     else: loc_2_filename = 'average'
 
 if location_1_name != "-" and location_2_name != "-":
