@@ -61,7 +61,7 @@ def single_location_analysis(file, location, model_name, model):
     st.write(f'Here is the analysis and forecast for {location}. The Gpp for this site was tracked as far back as {start_month}, {start_year} and our forecast projects Gpp until {end_month}, {end_year}')
 
     # creation optional time priods:
-    time_frame_options = ["Monthly", "Yearly"]
+    time_frame_options = ["Monthly","Quarterly", "Yearly"]
     
     # Create the sliders
     col1, col2, col3 = st.columns(3)
@@ -91,6 +91,13 @@ def single_location_analysis(file, location, model_name, model):
     if time_frame == "Yearly":
         filtered_df = df.groupby(df['date'].dt.year).agg({
             'Gpp': 'sum',
+            'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
+        }).reset_index()
+        # Filter the DataFrame based on the selected date range
+        filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
+    elif time_frame == "Quarterly":
+        filtered_df = df.groupby(pd.Grouper(key='date', freq='Q')).agg({
+            'Gpp': 'mean',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
         # Filter the DataFrame based on the selected date range
