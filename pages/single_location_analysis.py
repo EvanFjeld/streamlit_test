@@ -105,7 +105,7 @@ def single_location_analysis(file, location, model_name, model):
         # Filter the DataFrame based on the selected date range
         #filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
         #filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date)]
-        filtered_df = filtered_df[(filtered_df.date >= pd.Period(start_date, freq='Q')) & (filtered_df.date <= pd.Period(startend_date_date, freq='Q'))]
+        filtered_df = filtered_df[(filtered_df.date >= pd.Period(start_date, freq='Q')) & (filtered_df.date <= pd.Period(end_date, freq='Q'))]
         
     else:
         filtered_df = df
