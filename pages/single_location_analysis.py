@@ -97,7 +97,7 @@ def single_location_analysis(file, location, model_name, model):
         filtered_df = filtered_df[(filtered_df.date >= start_date.year) & (filtered_df.date <= end_date.year)]
     elif time_frame == "Quarterly":
         filtered_df = pd.PeriodIndex(df.date, freq='Q')
-        filtered_df = filtered_df..groupby('date').agg({
+        filtered_df = filtered_df.groupby('date').agg({
             'Gpp': 'mean',
             'isforecasted': lambda x: any(x)  # Check if any value in 'isforecasted' is True
         }).reset_index()
