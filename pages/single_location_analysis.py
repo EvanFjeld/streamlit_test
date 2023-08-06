@@ -104,13 +104,13 @@ def single_location_analysis(file, location, model_name, model):
         }).reset_index()
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= pd.Period(start_date, freq='Q')) & (filtered_df.date <= pd.Period(end_date, freq='Q'))]
-        
+        filtered_df['date'] = filtered_df['date'].dt.to_timestamp()
     else:
         filtered_df = df
         # Filter the DataFrame based on the selected date range
         filtered_df = filtered_df[(filtered_df.date >= start_date) & (filtered_df.date <= end_date)]
 
-    filtered_df['date'] = pd.to_datetime(filtered_df['date'])
+    #filtered_df['date'] = pd.to_datetime(filtered_df['date'])
     
     # Create the plot
     fig, ax = plt.subplots(figsize=(8, 6))
