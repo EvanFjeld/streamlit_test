@@ -124,6 +124,9 @@ def single_location_analysis(file, location, model_name, model):
     # sex axis background color to black
     fig.patch.set_facecolor('black')
     
+    # Set the y-axis to start at 0
+    ax.set_ylim(bottom=0)
+    
     # Plot!
     st.pyplot(fig)
 
