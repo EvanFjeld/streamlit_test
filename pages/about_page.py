@@ -4,6 +4,8 @@ st.set_page_config(
     page_title="About the Project",
 )
 
+tft_url = "https://arxiv.org/abs/2306.13815v1"
+
 st.write('# About the Project')
 
 st.markdown(
@@ -14,11 +16,11 @@ The final project was completed in the summer term of 2023.
 """)
 
 st.markdown(
-    """
+    f"""
     The objective of this project was to develop a user-friendly app that offers the Wildlands League valuable insights 
     into the climate impact of Logging Scars. This innovative tool not only presents real GPP data spanning from 2002 to 
-    2022 but also provides projections for GPP extending from 2023 to 2048. These projections were generated using a Temporal 
-    Fusion Transfer Model.
+    2022 but also provides projections for GPP extending from 2023 to 2048. These projections were generated using a 
+    [Temporal Fusion Transfer Model]({tft_url}).
 """)
 
 st.write('# Motivation')
