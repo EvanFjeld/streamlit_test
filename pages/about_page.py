@@ -39,7 +39,7 @@ removing environmental safeguards for forest operations. This situation raises c
 impacts on environmental sustainability and biodiversity in Canada's untouched boreal forests.
 """)
 
-st.write('# Motivation')
+st.write('# Thank You!')
 
 st.markdown(
     """
