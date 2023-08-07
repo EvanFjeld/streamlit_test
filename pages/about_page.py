@@ -51,3 +51,11 @@ This project was completed by Anshuman Awathi, Patricia Gallagher, and Evan Fjel
 of California at Berkeley's School of Information Master's in Data Science program. The final project was complated in the summer term of 2023.
 """
 )
+col1, col2 , col3, col4 = st.columns(4)
+
+with col1:
+    # Assuming you have the URL of the image
+    wildlands_image_url = "https://wildlandsleague.org/wp-content/themes/wildlands-league/assets/img/wildlands-league.png"
+    
+    # Load and display the image from the URL
+    st.image(wildlands_image_url, caption='Wildlands League', use_column_width=True)
