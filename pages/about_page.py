@@ -59,3 +59,8 @@ with col1:
     
     # Load and display the image from the URL
     st.image(wildlands_image_url, caption='Wildlands League', use_column_width=True)
+
+with col4:
+    berkeley_image_url = "https://ischoolonline.berkeley.edu/wp-content/uploads/sites/37/2021/10/UCB-CYB_Logo_282x56-1.png"
+    # Load and display the image from the URL
+    st.image(berkeley_image_url, caption='UC Berkeley MIDS', use_column_width=True)
