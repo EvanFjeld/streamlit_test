@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(
     page_title="About the Project",
 )
-
+donation_url = "https://donorbox.org/wl-ncp"
 tft_url = "https://arxiv.org/abs/2306.13815v1"
 
 st.write('# About the Project')
@@ -23,11 +23,14 @@ st.markdown(
     [Temporal Fusion Transfer Model]({tft_url}).
 """)
 
-st.write('# Motivation')
+wildlandsleague_url = "https://wildlandsleague.org/"
+report_url = "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://loggingscars.ca/wp-content/uploads/2020/07/logging-scars-press-release-2020.pdf"
+
+st.write(f'# [Motivation]({wildlandsleague_url})')
 
 st.markdown(
-    """
-The Wildlands League released a report in 2019 showcasing 270 barren sites, labeled as logging scars, that have remained 
+    f"""
+The Wildlands League released a [report]({report_url}) in 2019 showcasing 270 barren sites, labeled as logging scars, that have remained 
 treeless for up to three decades due to road construction and heavy equipment use related to forest operations. Logging 
 scars are areas in forests where the regrowth of trees is suppressed due to compacted soil resulting from machinery and 
 the decay of tree "waste" piles that suffocate future growth. These scars exist outside of Ontario's forest management 
@@ -49,6 +52,8 @@ Thank you to Puya Vahabi and Alberto Todeschini for their support and mentorship
 and guiding this project.
 """)
 
+st.markdown(f'[Donate to the Wildlands League]({donation_url})')
+
 col1, col2 , col3, col4 = st.columns(4)
 
 with col1:
@@ -57,6 +62,7 @@ with col1:
     
     # Load and display the image from the URL
     st.image(wildlands_image_url, caption='Wildlands League', use_column_width=True)
+    st.markdown(f'[Donate]({donation_url})')
 
 with col4:
     berkeley_image_url = "https://ischoolonline.berkeley.edu/wp-content/uploads/sites/37/2021/10/UCB-CYB_Logo_282x56-1.png"
