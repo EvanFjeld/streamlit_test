@@ -3,6 +3,11 @@ import pandas as pd
 
 st.title("Request a New Location")
 
+# Display the image
+AWS_BUCKET_URL = "https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com"
+coming_soon_image = "/streamlit_data/about/Coming-Soon-PNG-Image.png"
+st.image(AWS_BUCKET_URL + coming_soon_image, caption='', use_column_width=True)
+
 current = pd.read_csv("https://carbon-forecaster-capstone-s3.s3.us-west-2.amazonaws.com/streamlit_data/location_files/locations.csv")
 
 # Request location name
