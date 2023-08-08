@@ -4,7 +4,7 @@ st.set_page_config(
     page_title="About the Project",
 )
 donation_url = "https://donorbox.org/wl-ncp"
-tft_url = "https://arxiv.org/abs/2306.13815v1"
+tft_url = "https://arxiv.org/pdf/1912.09363.pdf"
 
 st.write('# About the Project')
 
@@ -19,8 +19,8 @@ st.markdown(
     f"""
     The objective of this project was to develop a user-friendly app that offers the Wildlands League valuable insights 
     into the climate impact of Logging Scars. This innovative tool not only presents real GPP data spanning from 2002 to 
-    2022 but also provides projections for GPP extending from 2023 to 2048. These projections were generated using a 
-    [Temporal Fusion Transfer Model]({tft_url}).
+    2022 but also provides projections for GPP extending from 2023 to 2050. These projections were generated using a 
+    [Temporal Fusion Transformer]({tft_url}).
 """)
 
 wildlandsleague_url = "https://wildlandsleague.org/"
@@ -43,6 +43,37 @@ sustainable timber supply. Despite this, the province aims to increase logging w
 removing environmental safeguards for forest operations. This situation raises concerns about the potential negative 
 impacts on environmental sustainability and biodiversity in Canada's untouched boreal forests.
 """)
+
+st.write("# What is GPP?")
+
+st.markdown(
+    """
+GPP stands for Gross Primary Productivity. It is a crucial concept in the study of Earth's ecosystems and the carbon cycle. GPP represents the total amount of energy that
+primary producers, such as plants and algae, capture through photosynthesis in a given area and time period. Photosynthesis is the process by which plants, algae, and some
+bacteria convert carbon dioxide (CO2) and sunlight into organic matter (usually in the form of glucose) and release oxygen (O2 as a byproduct). This organic matter serves 
+as food for various organisms, and the process of photosynthesis is fundamental in sustaining life on Earth. GPP is a fundamental parameter in understanding the global carbon
+cycle because it quantifies the rate at which carbon is captured from the atmosphere and converted into organic matter. It is a critical variable for assessing the carbon 
+sequestration capacity of ecosystems and their role in mitigating climate change by acting as carbon sinks. Researchers and scientists use various methods, such as satellite
+observations, eddy covariance measurements, and ecosystem models, to estimate GPP at different scales, from individual plants to entire ecosystems and the global level. 
+Understanding GPP helps scientists assess the health and productivity of ecosystems, monitor changes in vegetation, and make predictions about how ecosystems might respond 
+to climate change and human activities.
+""")
+
+st.write("# What is MODIS?")
+
+st.markdown(
+    """
+The MODIS (Moderate Resolution Imaging Spectroradiometer) dataset is a product of NASA's Earth Observing System (EOS) program and is obtained from instruments aboard two 
+satellites: Terra (launched in 1999) and Aqua (launched in 2002). This dataset plays a crucial role in monitoring various Earth processes and gathering data on the planet's 
+surface and atmosphere. It offers a combination of high spatial detail and global coverage, providing data at spatial resolutions of 250 meters, 500 meters, and 1 kilometer. 
+MODIS captures data in multiple spectral bands, including visible, infrared, and thermal wavelengths, allowing scientists to analyze various properties of land, ocean, 
+and atmosphere. With a high temporal resolution, MODIS revisits the entire Earth's surface every 1 to 2 days, making it valuable for near real-time monitoring of dynamic
+processes like vegetation health, land cover changes, and weather patterns. The dataset finds applications in numerous fields, such as vegetation monitoring, land and sea
+surface temperature assessment, snow and ice cover observation, and studying atmospheric parameters. MODIS data is publicly accessible through NASA's Earthdata Search and
+other data portals, distributed in Hierarchical Data Format (HDF) for ease of scientific use. However, it's important to consult the most up-to-date sources for the latest
+information on the MODIS program and its advancements since my last knowledge update in September 2021.
+"""
+)
 
 st.write('# Thank You!')
 
