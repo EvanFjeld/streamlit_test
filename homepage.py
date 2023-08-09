@@ -13,10 +13,10 @@ st.set_page_config(
 show_pages(
     [
         Page("homepage.py", "Homepage"),
-        Page("pages/single_location_analysis.py", "Single Location Analysis"),
-        Page("pages/multple_location_analysis.py", "Compare Multiple Locations"),
-        Page("pages/location_request.py", "Request a New Location"),
-        Page("pages/about_page.py", "About"),
+        Page("pages/1_single_location_analysis.py", "Single Location Analysis"),
+        Page("pages/2_multple_location_analysis.py", "Compare Multiple Locations"),
+        Page("pages/3_location_request.py", "Request a New Location"),
+        Page("pages/4_about_page.py", "About"),
     ]
 )
 
